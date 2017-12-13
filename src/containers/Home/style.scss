@@ -1,0 +1,17 @@
+.ac-home{
+  position: absolute;
+  top:0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #00cec9;
+  width: 100%;
+  .logo{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transform-origin: 0 0;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,27 @@
+@import '../../static/css/mixin';
+.m-tags{
+   @include line-bottom();
+   ul{
+       overflow: hidden;
+       padding-left: 9px;
+       li{
+           float: left;
+           display: table;
+           color: #4e4e4e;
+           font-size: 0;
+           height: 45px;
+           line-height: 45px;
+           img{
+               width: 22px;
+               margin-left: 10px;
+               margin-right: 5px;
+               float: left;
+           }
+            span{
+                display: table-cell;
+                vertical-align: middle;
+                font-size: 14px;
+            }
+       }
+   }
+}

@@ -1,0 +1,20 @@
+.video-container{
+    position: relative;
+}
+.video-container .icon{
+    font-size:60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #00cec8;
+    padding: 50px;
+}
+.video-container video{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: none;
+}

@@ -1,0 +1,76 @@
+@import '../../static/css/mixin';
+.m-shopinfo{
+  padding: 20px 15px 26px;
+  @include line-bottom;
+  .m-shopinfo-tit{
+    padding-right: 60px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight:600;
+  }
+  .m-shopinfo-pro{
+    //display: table;
+    margin-top: 12px;
+    line-height: 1;
+    .m-identifier{
+      color: #E84140;
+      font-size: 12px;
+      /*display: table-cell;
+      vertical-align: bottom;*/
+    }
+    .m-secskillprice{
+      color: #E84140;
+      font-size: 24px;
+      /*display: table-cell;
+      vertical-align: bottom;*/
+      em{
+        font-style: normal;
+      }
+      em:nth-of-type(2){
+        font-size: 14px;
+      }
+    }
+    .m-price{
+      /*display: table-cell;
+      vertical-align: bottom;*/
+      color: #999;
+      font-size: 10px;
+      margin-left: 8px;
+      text-decoration: line-through;
+
+    }
+    .m-remainNumber{
+      display: inline-block;
+      color: #666;
+      font-size: 12px;
+      margin-left: 83px;
+      /*height: 32px;
+      line-height: 32px;*/
+    }
+  }
+  .m-shopinfo-type{
+    width: 50px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 3px;
+    background:#E84140;
+    background:linear-gradient(to right, #ff7943, #E84140);
+    margin-top: 9px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+  }
+  .m-shopinfo-cheapMoney{
+    padding: 0 5px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 3px;
+    background:#E84140;
+    background:linear-gradient(to right, #ff7943, #E84140);
+    margin-top: 9px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;    
+  }
+}
