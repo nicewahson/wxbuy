@@ -306,7 +306,7 @@ class Detail extends React.Component {
                                 </TabPanel>
                             </Tabs>
                             <BuyFoot
-                                type= {4}
+                                type= {1}
                                 startTime= {"2016.05.06"}
                                 endTime= {"2016.05.09"}
                                 token={this.state.token}
