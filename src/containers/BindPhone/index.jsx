@@ -3,10 +3,11 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import logo from '../../static/img/logo.png'
 import {sentcode,nowBind} from '../../fetch/commonApi'
 import $ from 'jquery'
-// import layer from 'layer'
 import './style.scss'
 
-const layer =window.layer
+const layer = window.layer
+
+
 class Home extends React.Component {
     constructor(props, context) {
         super(props, context);

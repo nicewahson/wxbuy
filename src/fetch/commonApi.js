@@ -75,3 +75,28 @@ export function nowBind(phone,code) {
     const result = get(`${config.host}/discover/getRelationDiarysBySpu?phone=${phone}&code=${code}`);
     return result
 }
+
+/**
+ * 获取头部banner
+ *
+ * @export
+ * @param {num} spuId
+ * @returns
+ */
+export function getTopBanner(spuId) {
+    const result = get(config.host+'/life/listSpuActivity?spuId=' + spuId)
+    return result
+}
+
+/**
+ * 获取抢购列表
+ *
+ * @export
+ * @param {num} spuId
+ * @returns
+ */
+export function getBuyList(spuId) {
+    const result = get(config.host+'/life/listSpuActivity?spuId=' + spuId)
+    return result
+}
+

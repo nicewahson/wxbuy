@@ -1,0 +1,89 @@
+.list-swipe{
+  position: relative;
+  width:100%;
+  padding:0 2%;
+  margin-top: 10px;
+ ul{
+   display: block;
+
+   li{
+     display: block;
+     color: #4e4e4e;
+     border: 1px solid #f1f1f1;
+     padding: 2%;
+     overflow: hidden;
+
+     .ml-img{
+        width: 30%;
+       float: left;
+       margin-right: 2%;
+       img{
+          width: 100%;
+         display: block;
+       }
+     }
+     .ml-title{
+        font-size: 14px;
+       float: left;
+       width: 66%;
+       height: 38px;
+       line-height: 19px;
+       overflow: hidden;
+     }
+     .ml-price{
+       float: left;
+       width: 66%;
+       .price{
+         width: 60%;
+         float: left;
+         span{
+           display: block;
+           &.cx{
+             color:#c82829 ;
+             font-size: 18px;
+             b{
+               font-size: 28px;
+             }
+           }
+           &.yj{
+             color: #999;
+           }
+         }
+       }
+       .nowbuy{
+         width: 40%;
+         float: left;
+         a{
+           background-color:#c82829 ;
+           font-size: 14px;
+           padding: 4px 4px;
+           border-radius: 4px;
+           display: block;
+           text-align: center;
+           color: #fff;
+           text-decoration: none;
+           margin-top: 10px;
+         }
+         span{
+           font-size: 12px;
+           display: block;
+           text-align: center;
+           margin-top: 5px;
+         }
+       }
+       .overbuy{
+         width: 40%;
+         float: left;
+         span{
+           font-size: 18px;
+           display: block;
+           text-align: center;
+           color:#c82829 ;
+           margin-top: 10px;
+           font-weight: bold;
+         }
+       }
+     }
+   }
+ }
+}

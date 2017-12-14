@@ -6,4 +6,5 @@ export { default as App } from './App';
 export { default as Home } from './Home';
 export { default as Detail } from './Detail';
 export { default as BindPhone } from './BindPhone';
+export { default as Center } from './Center';
 export { default as NotFound } from './NotFound';
