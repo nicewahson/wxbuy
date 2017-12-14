@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router,Route,IndexRoute, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 const App = (location, callback) => {
     require.ensure([], (require) => {
@@ -18,6 +18,13 @@ const Detail = (location, callback) => {
         callback(null, require('../containers').Detail);
     }, 'detail');
 };
+
+const Center = (location, callback) => {
+    require.ensure([], (require) => {
+        callback(null, require('../containers').Center);
+    }, 'center');
+};
+
 const BindPhone = (location, callback) => {
     require.ensure([], (require) => {
         callback(null, require('../containers').BindPhone);
@@ -30,14 +37,15 @@ const NotFound = (location, callback) => {
 };
 
 var RouterMap = (
-  <Router history={browserHistory}>
-    <Route path="/" getComponent={App}>
-      <IndexRoute getComponent={Home}/>
-      <Route path='/detail' getComponent={Detail}/>
-      <Route path='/bindphone' getComponent={BindPhone}/>
-      <Route path='*' getComponent={NotFound}/>
-    </Route>
-  </Router>
+    <Router history={browserHistory}>
+        <Route path="/" getComponent={App}>
+            <IndexRoute getComponent={Home}/>
+            <Route path='/wxcenter' getComponent={Center}/>
+            <Route path='/detail' getComponent={Detail}/>
+            <Route path='/bindphone' getComponent={BindPhone}/>
+            <Route path='*' getComponent={NotFound}/>
+        </Route>
+    </Router>
 );
 
 export default RouterMap
