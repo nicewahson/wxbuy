@@ -18,7 +18,11 @@ const Detail = (location, callback) => {
         callback(null, require('../containers').Detail);
     }, 'detail');
 };
-
+const BindPhone = (location, callback) => {
+    require.ensure([], (require) => {
+        callback(null, require('../containers').BindPhone);
+    }, 'bindphone');
+};
 const NotFound = (location, callback) => {
     require.ensure([], (require) => {
         callback(null, require('../containers').NotFound);
@@ -30,6 +34,7 @@ var RouterMap = (
     <Route path="/" getComponent={App}>
       <IndexRoute getComponent={Home}/>
       <Route path='/detail' getComponent={Detail}/>
+      <Route path='/bindphone' getComponent={BindPhone}/>
       <Route path='*' getComponent={NotFound}/>
     </Route>
   </Router>

@@ -22,17 +22,11 @@ class HomeHeader extends React.Component {
         let priceDecorate=`￥${Number(this.props.price).toFixed(2)}`,
             numDecorate='';
         if(this.props.type ===1){
+            priceDecorate =`￥${Number(this.props.price).toFixed(2)}`;
             numDecorate = `仅剩${this.props.remainNumber}件`
         }else if(this.props.type ===2){
-            priceDecorate =`市场价：￥${Number(this.props.price).toFixed(2)}`;
-            numDecorate = `已售：${this.props.remainNumber}`;
-        }else if(this.props.type ===3){
-            priceDecorate =`￥${Number(this.props.totalPrice).toFixed(2)}`;
-            numDecorate = `已售：${this.props.remainNumber}`
-            if(priceIndex>0){
-	            secSkillPriceInt = price.slice(0,priceIndex);
-	            secSkillPriceDecimal = price.slice(priceIndex);
-            }
+            priceDecorate =`￥${Number(this.props.price).toFixed(2)}`;
+            numDecorate = ``;
         }
         return (
             <div className="m-shopinfo">
@@ -45,9 +39,6 @@ class HomeHeader extends React.Component {
                     <span className="m-price">{priceDecorate}</span>
                     <span className="m-remainNumber">{numDecorate}</span>
                 </div>
-                {this.props.type ===1? <div className="m-shopinfo-type">37秒杀</div> : ''}
-                {/* {this.props.type ===2? <div className="m-shopinfo-type">37秒杀</div> : ''} */}
-                {this.props.type ===3? <span className="m-shopinfo-cheapMoney">立省{cheapMoney}元</span>:''}
             </div>
         )
     }

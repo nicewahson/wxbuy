@@ -1,0 +1,116 @@
+input:-webkit-autofill{
+  　　-webkit-box-shadow: 0 0 0 400px #E8ECED inset;
+  　　-webkit-text-fill-color: #666666;
+}
+*:focus {outline: none}
+.bind-phone{
+  position: absolute;
+  top:0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  width: 100%;
+  .logo{
+    position: absolute;
+    top:20%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transform-origin: 0 0;
+    max-width: 100%;
+    border-radius:50%;
+  }
+  .f-mod{
+    overflow: hidden;
+    padding-top: 50%;
+    width: 80%;
+    margin: 0 auto;
+    .f-group{
+      display: flex;
+      box-sizing: border-box;
+      background:rgba(255,255,255,.3);
+      border-radius: 6px;
+      margin-top: 16px;
+      overflow: hidden;
+      line-height: 44px;
+      position: relative;
+      border: 1px solid #e1e1e1;
+      .label{
+        box-sizing: border-box;
+        display: inline-block;
+        width: 75px;
+        //  flex: 0 0 75px;
+        padding-left: 15px;
+        font-size: 16px;
+        float: left;
+        color: #666;
+      }
+      .for-in{
+        box-sizing: border-box;
+        flex: 1;
+        padding: 0 5px;
+        input{
+          width: 100%;
+          border: 0;
+          float: left;
+          height: 24px;
+          line-height: 24px;
+          vertical-align:middle;
+          margin:10px 0;
+          background: none;
+          font-size: 16px;
+          color: #666;;
+
+          &::-webkit-input-placeholder{
+            color: #999;
+            font-size: 16px;
+          }
+        }
+      }
+
+    }
+    .f-group.f-code{
+      .for-in{
+        margin-right: 80px;
+      }
+      .sent{
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 0;
+        box-sizing: border-box;
+        background: none;
+        flex: 0 0 80px;
+        width: 80px;
+        height: 16px;
+        line-height: 16px;
+        margin: 14px 0px;
+        text-align: center;
+        color: #666;
+        font-size: 16px;
+        border-left: 1px solid #e1e1e1;
+      }
+      .get{
+        color: #666;
+      }
+    }
+    .f-sub{
+      a{
+        width: 100%;
+        margin-top: 32px;
+        margin-bottom: 32px;
+        border-radius: 4px;
+        height: 44px;
+        line-height: 44px;
+        color:#fff;
+        font-size: 16px;
+        font-weight: normal;
+        background: #5cb85c;
+        border: none;
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+}

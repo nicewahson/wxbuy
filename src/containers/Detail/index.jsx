@@ -9,7 +9,7 @@ import Tags from '../../components/Tags';
 import WhiteSpace from '../../components/WhiteSpace';
 import DescPullLoad from '../../components/DescPullLoad';
 import DiarysPullLoad from '../../components/DiarysPullLoad';
-import FixFoot from '../../components/FixFoot';
+import BuyFoot from '../../components/BuyFoot';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
 import {getDetailInfo, getDetailActivity} from '../../fetch/detail'
@@ -46,6 +46,9 @@ class Detail extends React.Component {
             price: "0",
             marketPrice: "0",
             soldNumber: 0,
+            buytype:"",
+            startTime:"",
+            endTime:"",
             serverVedio:{videoPic: '', video: ''},
             lastPage:0,
             list:[],
@@ -83,7 +86,10 @@ class Detail extends React.Component {
                      showTitle: json.result.showTitle,
                      price: json.result.price,
                      marketPrice:json.result.marketPrice,
-                     soldNumber: json.result.soldNumber
+                     soldNumber: json.result.soldNumber,
+                     buytype: json.result.type,
+                     startTime:json.result.startTime,
+                     endTime:json.result.endTime,
                  })
                  //this.refresh(json.result.startTime,json.result.endTime)
              }else{
@@ -258,7 +264,7 @@ class Detail extends React.Component {
                             price={this.state.marketPrice}
                             secSkillPrice={this.state.price}
                             remainNumber={this.state.soldNumber}
-                            type = {2}  // 1 秒杀 套餐  2 详情
+                            type = {this.state.buytype}  // 1 秒杀 套餐  2 详情
                             />
                             <Tags/>
                             <div className="m-activity">
@@ -299,7 +305,12 @@ class Detail extends React.Component {
                                     ></DiarysPullLoad>
                                 </TabPanel>
                             </Tabs>
-                            <FixFoot userId={this.state.userId}></FixFoot>
+                            <BuyFoot
+                                type= {4}
+                                startTime= {"2016.05.06"}
+                                endTime= {"2016.05.09"}
+                                token={this.state.token}
+                            ></BuyFoot>
                         </div>
                         <div className={cs({'m-activesheet':true,hidden:this.state.activityVisibility})}>
                             <div ref="mActivesheetBox" className={cs({"m-activesheet-box":true,'fadeInUp':this.state.fadeInUp,'fadeOutDown':this.state.fadeOutDown})}>
