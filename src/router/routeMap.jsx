@@ -40,9 +40,9 @@ var RouterMap = (
     <Router history={browserHistory}>
         <Route path="/wxpurchase" getComponent={App}>
             <IndexRoute getComponent={Home}/>
-            <Route path='/wxpurchase/wxcenter' getComponent={Center}/>
-            <Route path='/wxpurchase/detail' getComponent={Detail}/>
-            <Route path='/wxpurchase/bindphone' getComponent={BindPhone}/>
+            <Route path='/wxpurchase/wxcenter/build/wxpurchase/wxcenter' getComponent={Center}/>
+            <Route path='/wxpurchase/wxcenter/build/wxpurchase/detail' getComponent={Detail}/>
+            <Route path='/wxpurchase/wxcenter/build/wxpurchase/bindphone' getComponent={BindPhone}/>
             <Route path='*' getComponent={NotFound}/>
         </Route>
     </Router>
