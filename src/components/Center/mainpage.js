@@ -14,7 +14,8 @@ class Main extends React.Component{
 
     componentWillMount(){
         let url = window.location.href;
-        getWxConfig(url)
+        let title = '37美长沙芙蓉德政园润心苑店'
+        getWxConfig(url, title)
     }
 
     render(){
