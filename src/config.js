@@ -5,7 +5,7 @@ const host = {url:'http://app-server.dev.sanqimei.com'}//开发
 // host:'http://app-server.dev.sanqimei.com',
 const wxHost = {url:'http://activity-server.sanqimei.com'}
 const config = {
-    redirectUri: 'http://activities.sanqimei.com/lottery/dist/index.html',
+    redirectUri: 'http://activities.sanqimei.com/wxpurchase/wxcenter/build/list',
     timeout:5000,
     shareLogo:'http://static.sanqimei.com/activity/12/two_12.png',
     shareTitle:'',
