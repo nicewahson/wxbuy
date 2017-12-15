@@ -38,7 +38,7 @@ const NotFound = (location, callback) => {
 
 var RouterMap = (
     <Router history={browserHistory}>
-        <Route path="/wxpurchase" getComponent={App}>
+        <Route path="/wxpurchase/wxcenter/build" getComponent={App}>
             <IndexRoute getComponent={Home}/>
             <Route path='/wxpurchase/wxcenter/build/wxpurchase/wxcenter' getComponent={Center}/>
             <Route path='/wxpurchase/wxcenter/build/wxpurchase/detail' getComponent={Detail}/>

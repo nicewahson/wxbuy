@@ -14,7 +14,7 @@ class Main extends React.Component{
 
     componentWillMount(){
         let url = window.location.href;
-        getWxConfig(encodeURIComponent(url))
+        getWxConfig(url)
     }
 
     render(){
