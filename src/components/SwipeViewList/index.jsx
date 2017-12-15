@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style.scss'
 import Logo from '../../static/img/400.png'
+
+let type =["1", "2","3"];
 class SwipeViewList extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -45,14 +47,36 @@ class SwipeViewList extends React.Component {
                 <span className="cx">￥<b>3.7 </b></span>
                 <span className="yj"><del>￥37</del></span>
               </div>
-              {/*<div className="nowbuy">*/}
-                {/*<a href="">立即抢购</a>*/}
-                {/*<span>仅剩余10份</span>*/}
-              {/*</div>*/}
+                {/*{*/}
+                    {/*item.type==1 &&*/}
+                    {/*<div className="nowbuy">*/}
+                    {/*<a href="">立即抢购</a>*/}
+                    {/*<span>仅剩余10份</span>*/}
+                  {/*</div>*/}
+                {/*}*/}
+                {/*{*/}
+                  {/*item.type==2 && <div className="overbuy">*/}
+                    {/*<span>已抢完</span>*/}
+                  {/*</div>*/}
+                {/*}*/}
+                {/*{*/}
+                  {/*item.type==3 && <div className="overbuy">*/}
+                    {/*<span>已购买</span>*/}
+                  {/*</div>*/}
+                {/*}*/}
               <div className="overbuy">
-                <span>已抢完</span>
+                  <span>已购买</span>
               </div>
             </div>
+              {
+                  {Logo} == 4?
+                <div className="active-over">
+                  <span>活动已结束</span>
+                </div>
+                      :
+                      ""
+              }
+
           </li>
       );
 
