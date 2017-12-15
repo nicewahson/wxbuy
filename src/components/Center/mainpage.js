@@ -19,7 +19,7 @@ class Main extends React.Component{
     }
 
     render(){
-        return <div>
+        return <div style={{padding: 8}}>
             <Top/>
             <div className="m-tags">
                 <ul>
