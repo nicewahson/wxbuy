@@ -14,11 +14,12 @@ class Main extends React.Component{
 
     componentWillMount(){
         let url = window.location.href;
-        getWxConfig(encodeURIComponent(url))
+        let title = '37美长沙芙蓉德政园润心苑店'
+        getWxConfig(url, title)
     }
 
     render(){
-        return <div>
+        return <div style={{padding: 8}}>
             <Top/>
             <div className="m-tags">
                 <ul>

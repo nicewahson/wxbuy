@@ -7,7 +7,7 @@ import {config} from '../config'
 const layer = window.layer
 const wx = window.wx
 
-function getWxConfig(url,lineLink){
+function getWxConfig(url,shareTitle){
     $ajax('/free/getWeChatInfo',{url:url},function(res){
         if(res.status === '1'){
             var data = res.result
@@ -35,7 +35,7 @@ function getWxConfig(url,lineLink){
             //初始化微信配置
             wxShareConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             //分享准备
-            wxShareReady(lineLink, config.shareTitle, config.shareContent, config.shareLogo);
+            wxShareReady(shareTitle, shareTitle + config.shareContent, config.shareLogo);
         }
     })
 }
@@ -70,25 +70,6 @@ function wxShareConfig(appId, timestamp, nonceStr, signature) {
     });
 }
 
-function updateShareTimes(){
-    let url = '/share/updateShareCount';
-    let openid = JSON.parse(sessionStorage.getItem('accessinfo')).openid;
-    // alert(sessionStorage.getItem('accessinfo')+'-----info');
-    $ajax(url, {openid}, function(res){
-        if(res.status == '1'){
-
-        }else{
-            layer.open({
-                content: res.errorMsg,
-                skin: 'msg',
-                time: 2
-            });
-        }
-    }, function(){
-        // alert('分享失败')
-    })
-}
-
 
 /**
  * 分享准备
@@ -97,7 +78,7 @@ function updateShareTimes(){
  * @param shareContent
  * @param shareLogo
  */
-function wxShareReady(lineLink, shareTitle, shareContent, shareLogo) {
+function wxShareReady(shareTitle, shareContent, shareLogo) {
     wx.ready(function () {
         //获取“分享到朋友圈”
         wx.onMenuShareTimeline({
@@ -106,7 +87,6 @@ function wxShareReady(lineLink, shareTitle, shareContent, shareLogo) {
             imgUrl: shareLogo, // 分享图标
             success: function (res) {
                 // 用户确认分享后执行的回调函数
-                updateShareTimes()
             },
             cancel: function (res) {
                 // 用户取消分享后执行的回调函数
@@ -123,6 +103,7 @@ function wxShareReady(lineLink, shareTitle, shareContent, shareLogo) {
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function (res) {
                 // 用户确认分享后执行的回调函数
+                alert('分享朋友成功')
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
