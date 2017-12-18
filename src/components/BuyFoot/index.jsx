@@ -36,14 +36,14 @@ class FixFoot extends React.Component {
             })
 
         }
-        else if(this.props.buttonTyle.type ===3){
+        else if(this.props.buttonTyle.type ==3){
             layer.open({
                 content: this.props.buttonTyle.info
                 ,skin: 'msg'
                 ,time: 2
             });
         }
-        else if(this.props.buttonTyle.type ===4){
+        else if(this.props.buttonTyle.type ==4){
             layer.open({
                 content: '您已成功购买该商品，下载APP，立即预约体验吧~'
                 ,btn: [ '去下载','取消']
