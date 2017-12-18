@@ -5,7 +5,8 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import SwipeViewList from '../../components/SwipeViewList';
-import {getBuyList} from '../../fetch/commonApi'
+import {getData, getQueryString, $ajax} from '../../fetch/getData'
+const layer =window.layer
 
 
 class Middle extends React.Component{
@@ -13,34 +14,38 @@ class Middle extends React.Component{
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
-            buyList:{},
-            token:"",
-            spuId:"",
-            userId:""
         }
     }
     componentDidMount() {
-        // console.log(config.getNowFormatDate());
-        const result = getBuyList(this.state.spuId)
-        result.then(res => {
-            return res.json()
-        }).then(json => {
-            if (json.status === '1') {
+        let url = '/webActivity/getActivityInfo';
+        (async () => {
+            let res = await getData(url, 'POST', {storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:"",wxToken:""});
+
+
+            if (res.status == '1') {
+                layer.open({
+                    content: res.errorMsg
+                    ,skin: 'msg'
+                    ,time: 2
+                });
                 this.setState({
-                    buyList: json.result,
-                })
-                //this.refresh(json.result.startTime,json.result.endTime)
+                    buyList:res.result.lstSpu,
+                    activestatus:res.status
+                });
             } else {
-                console.log(json.errorMsg)
+                layer.open({
+                    content: res.errorMsg
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+
             }
-        }).catch(ex => {
-            console.log(ex.message)
-        })
+        })()
 
     }
     render(){
         return <div>
-            <SwipeViewList swipeImgs={this.state.buyList}/>
+            <SwipeViewList swipeImgs={this.state.buyList} activestatus={this.state.activestatus}/>
         </div>
     }
 }

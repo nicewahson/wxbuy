@@ -11,7 +11,7 @@ import config from '../util'
  * @returns 
  */
 export function getShopDesc(spuId,pageNumber,pageSize) {
-     const result = get(`${config.host}/life/getSpuDetail?spuId=${spuId}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
+     const result = get(`${config.host}/webActivity/getSpuDetail?spuId=${spuId}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
      //const result = get('/life/getSpuDetail?spuId=' + spuId + '&pageNumber=' + pageNumber + '&pageSize='+pageSize);
      return result
 }
@@ -28,8 +28,8 @@ export function getShopDesc(spuId,pageNumber,pageSize) {
  * @param {num} pageSize 
  * @returns 
  */
-export function getShopDiarys(token,type,spuId,pageNumber,pageSize){
-    const result = get(`${config.host}/discover/getRelationDiarysBySpu?token=${token}&type=${type}&spuId=${spuId}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
+export function getShopDiarys(spuId,pageNumber,pageSize){
+    const result = get(`${config.host}/webActivity/getSpuDetail?spuId=${spuId}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
      //const result = get('/life/getSpuDetail?spuId=' + spuId + '&pageNumber=' + pageNumber + '&pageSize='+pageSize);
      return result
 }
@@ -76,27 +76,4 @@ export function nowBind(phone,code) {
     return result
 }
 
-/**
- * 获取头部banner
- *
- * @export
- * @param {num} spuId
- * @returns
- */
-export function getTopBanner(spuId) {
-    const result = get(config.host+'/life/listSpuActivity?spuId=' + spuId)
-    return result
-}
-
-/**
- * 获取抢购列表
- *
- * @export
- * @param {num} spuId
- * @returns
- */
-export function getBuyList(spuId) {
-    const result = get(config.host+'/life/listSpuActivity?spuId=' + spuId)
-    return result
-}
 

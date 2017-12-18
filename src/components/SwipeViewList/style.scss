@@ -1,15 +1,13 @@
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
 .list-swipe{
   position: relative;
   width:100%;
-  padding:0 2%;
-  margin-top: 10px;
- ul{
-   display: block;
-
-   li{
+  padding-top: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+   .sw-listpic{
      display: block;
      color: #4e4e4e;
-     border: 1px solid #f1f1f1;
      overflow: hidden;
       position: relative;
      .ml-img{
@@ -35,12 +33,12 @@
        float: left;
        width: 66%;
        .price{
-         width: 60%;
+         width: 40%;
          float: left;
          span{
            display: block;
            &.cx{
-             color:#c82829 ;
+             color:#E84141 ;
              font-size: 18px;
              b{
                font-size: 28px;
@@ -48,39 +46,46 @@
            }
            &.yj{
              color: #999;
+             font-size: 14px;
            }
          }
        }
        .nowbuy{
-         width: 40%;
+         width: 60%;
          float: left;
          a{
-           background-color:#c82829 ;
+           background-color:#E84141 ;
            font-size: 14px;
-           padding: 4px 4px;
+           padding: 7px 4px;
            border-radius: 4px;
            display: block;
            text-align: center;
            color: #fff;
            text-decoration: none;
-           margin-top: 10px;
+           width: 80px;
+           float: right;
          }
-         span{
-           font-size: 12px;
-           display: block;
-           text-align: center;
-           margin-top: 5px;
+         .lastnum{
+           .sy{
+             font-size: 12px;
+             display: block;
+             text-align: center;
+             margin-top: 5px;
+             float: left;
+           }
          }
+
+
        }
        .overbuy{
          width: 40%;
-         float: left;
+         float: right;
          span{
-           font-size: 18px;
+           font-size: 14px;
            display: block;
            text-align: center;
-           color:#c82829 ;
-           margin-top: 10px;
+           color:#999 ;
+           margin-top: 36px;
            font-weight: bold;
          }
        }
@@ -108,5 +113,11 @@
        }
      }
    }
- }
+
+}
+
+.progressBar{width:50%;height:8px;background-color:#eee;border-radius:5px;margin-top:10px; float: right}
+.bar{height:8px;border-radius:5px;background:#E84141;}
+.sy-bar{
+  font-size: 0;
 }

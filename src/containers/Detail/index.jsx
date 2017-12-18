@@ -14,6 +14,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
 import {getDetailInfo, getDetailActivity} from '../../fetch/detail'
 import {getShopDesc,getShopDiarys} from '../../fetch/commonApi'
+import {getData, getQueryString, $ajax} from '../../fetch/getData'
 
 import More from '../../static/img/more.png'
 import './style.scss'
@@ -40,9 +41,10 @@ class Detail extends React.Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
             initDone: false,
-            shopInfo:{},
+            shopsinfo:{},
             picList:[],
             showTitle: "",
+            showsinfo:{},
             price: "0",
             marketPrice: "0",
             soldNumber: 0,
@@ -62,6 +64,7 @@ class Detail extends React.Component {
             curPage:1,
             pageSize:5,
             dyTotal:0,
+            buttonTyle:{},
             dyIsLastPage:0,
             dyList:[],
             dyHasMore: true,
@@ -76,20 +79,22 @@ class Detail extends React.Component {
     }
     componentDidMount() {
         // console.log(config.getNowFormatDate());
-         const result = getDetailInfo(this.state.spuId)
+         const result = getDetailInfo(this.state.spuId,getQueryString('activityId'),getQueryString('storeId'))
          result.then(res => {
             return res.json()
          }).then(json => {
              if(json.status === '1'){
+                 console.log(json.result.info);
                  this.setState({
                      picList: json.result.picList,
-                     showTitle: json.result.showTitle,
+                     showsinfo: json.result.info,
                      price: json.result.price,
                      marketPrice:json.result.marketPrice,
                      soldNumber: json.result.soldNumber,
                      buytype: json.result.type,
                      startTime:json.result.startTime,
                      endTime:json.result.endTime,
+                     buttonTyle:json.result.button
                  })
                  //this.refresh(json.result.startTime,json.result.endTime)
              }else{
@@ -111,6 +116,7 @@ class Detail extends React.Component {
             return res.json()
          }).then(json => {
              if(json.status === '1'){
+                 console.log(json.result.serverVedio);
                  this.setState({
                      serverVedio:json.result.serverVedio,
                      lastPage:json.result.lastPage,
@@ -127,39 +133,40 @@ class Detail extends React.Component {
              // }
          })
          
-         const detailActivity = getDetailActivity(this.state.spuId);
-         detailActivity.then(res => {
-            return res.json()
-         }).then(json => {
-             let showActivitys = [];
-             if(json.status === '1'){
-                 if(json.result.length>0){
-                    json.result.forEach(function(item,key){
-                       if(+item.isShow === 1){
-                           showActivitys.push(item);
-                       }
-                    }) 
-                 }
-                 this.setState({
-                     showActivitys:showActivitys,
-                     activitys:json.result
-                 })
-             }
-         }).catch(ex => {
-             console.log(ex.message);
-             // if (__DEV__) {
-             //     console.error('用户主页“订单列表”获取数据报错, ', ex.message)
-             // }
-         })
+         // const detailActivity = getDetailActivity(this.state.spuId);
+         // detailActivity.then(res => {
+         //    return res.json()
+         // }).then(json => {
+         //     let showActivitys = [];
+         //     if(json.status === '1'){
+         //         if(json.result.length>0){
+         //            json.result.forEach(function(item,key){
+         //               if(+item.isShow === 1){
+         //                   showActivitys.push(item);
+         //               }
+         //            })
+         //         }
+         //         this.setState({
+         //             showActivitys:showActivitys,
+         //             activitys:json.result
+         //         })
+         //     }
+         // }).catch(ex => {
+         //     console.log(ex.message);
+         //     // if (__DEV__) {
+         //     //     console.error('用户主页“订单列表”获取数据报错, ', ex.message)
+         //     // }
+         // })
 
-        const shopDiarys = getShopDiarys(this.state.token,1,this.state.spuId,this.state.dyCurPage,this.state.pageSize);
+        const shopDiarys = getShopDiarys(this.state.spuId,this.state.dyCurPage,this.state.pageSize);
          shopDiarys.then(res => {
             return res.json()
          }).then(json => {
              if(json.status === '1'){
                 let dyIndex =  Math.ceil(json.result.total / this.state.pageSize);
+                console.log(json.result);
                 this.setState({
-                    dyTotal:json.result.total,
+                    dyTotal:json.result.total||0,
                     dyIsLastPage:json.result.isLastPage,
                     dyList:json.result.list,
                     // dyHasMore: true,
@@ -260,18 +267,18 @@ class Detail extends React.Component {
                         <div className="cnt-body" ref="cntBody">
                             <SwipeView swipeImgs={this.state.picList}/>
                             <ShopInfo
-                            showTitle={this.state.showTitle}
-                            price={this.state.marketPrice}
-                            secSkillPrice={this.state.price}
-                            remainNumber={this.state.soldNumber}
-                            type = {this.state.buytype}  // 1 秒杀 套餐  2 详情
+                            showinfo={this.state.showsinfo}
+                            // price={this.state.marketPrice}
+                            // secSkillPrice={this.state.price}
+                            // remainNumber={this.state.soldNumber}
+                            // type = {this.state.buytype}  // 1 秒杀 套餐  2 详情
                             />
                             <Tags/>
-                            <div className="m-activity">
-                                <p>活动</p>
-                                <ul className='activity-list'>{showActivitysPage}</ul>
-                                <i onClick = {this.handleClick.bind(this)}><img src={More} alt=""/></i>
-                            </div>
+                            {/*<div className="m-activity">*/}
+                                {/*<p>活动</p>*/}
+                                {/*<ul className='activity-list'>{showActivitysPage}</ul>*/}
+                                {/*<i onClick = {this.handleClick.bind(this)}><img src={More} alt=""/></i>*/}
+                            {/*</div>*/}
                             <WhiteSpace/>
                             <Tabs>
                                 <TabList className="my-tab-list">
@@ -306,10 +313,7 @@ class Detail extends React.Component {
                                 </TabPanel>
                             </Tabs>
                             <BuyFoot
-                                type= {1}
-                                startTime= {"2016.05.06"}
-                                endTime= {"2016.05.09"}
-                                token={this.state.token}
+                                buttonTyle={this.state.buttonTyle}
                             ></BuyFoot>
                         </div>
                         <div className={cs({'m-activesheet':true,hidden:this.state.activityVisibility})}>

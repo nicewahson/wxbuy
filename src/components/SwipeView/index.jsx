@@ -30,7 +30,7 @@ class SwipeView extends React.Component {
       }
     };
     return (
-      <div className="m-swipe">
+      <div className="m-swipe detail">
         {swipeImgs.length?
             <div className="m-swipe-container">
                 <Slider {...settings}>
@@ -42,7 +42,7 @@ class SwipeView extends React.Component {
                     })
                   }
                 </Slider> 
-                <div className="m-computed">{this.state.activeIndex}/{swipeImgs.length}</div>
+                {/*<div className="m-computed">{this.state.activeIndex}/{swipeImgs.length}</div>*/}
             </div>
          :<div></div>
         }

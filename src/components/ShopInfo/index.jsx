@@ -8,30 +8,28 @@ class HomeHeader extends React.Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
-        let secSkillPrice = ''+Number(this.props.secSkillPrice).toFixed(2);
+        console.log(this.props.showinfo);
+        let secSkillPrice = ''+Number(this.props.showinfo.activityPrice).toFixed(2);
         let idotIndex =secSkillPrice.indexOf('.');
         let secSkillPriceInt = '';
         let secSkillPriceDecimal = '';
-        let price = ''+Number(this.props.price).toFixed(2);
+        let price = ''+Number(this.props.showinfo.spuPrice).toFixed(2);
         let priceIndex = price.indexOf('.');
         let cheapMoney = ''+Math.floor(this.props.cheapMoney);
         if(idotIndex>0){
             secSkillPriceInt = secSkillPrice.slice(0,idotIndex);
             secSkillPriceDecimal = secSkillPrice.slice(idotIndex);
         }
-        let priceDecorate=`￥${Number(this.props.price).toFixed(2)}`,
+        let priceDecorate=`￥${Number(this.props.showinfo.spuPrice).toFixed(2)}`,
             numDecorate='';
-        if(this.props.type ===1){
-            priceDecorate =`￥${Number(this.props.price).toFixed(2)}`;
-            numDecorate = `仅剩${this.props.remainNumber}件`
-        }else if(this.props.type ===2){
-            priceDecorate =`￥${Number(this.props.price).toFixed(2)}`;
-            numDecorate = ``;
-        }
+
+            priceDecorate =`￥${Number(this.props.showinfo.spuPrice).toFixed(2)}`;
+            numDecorate = `仅剩${this.props.showinfo.number}件`
+
         return (
             <div className="m-shopinfo">
                 <div className="m-shopinfo-tit">
-                    {this.props.showTitle}
+                    {this.props.showinfo.spuName}
                 </div>
                 <div className="m-shopinfo-pro">
                     <span className="m-identifier">￥</span>

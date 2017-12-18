@@ -14,19 +14,19 @@ class FixFoot extends React.Component {
     }
     check() {
         this.setState({editable: false});
-        if(this.props.type ===1){
+        if(this.props.buttonTyle.type ==1){
             layer.open({
-                content: "该活动还未开始"
+                content: this.props.buttonTyle.info
                 ,skin: 'msg'
                 ,time: 2
             });
-        }else if(this.props.type ===2){
+        }else if(this.props.buttonTyle.type ==2){
             const userBind = getUserBind(this.props.token);
             userBind.then(res => {
                 return res.json()
             }).then(json => {
                 if(json.status === '0'){
-                    browserHistory.push('/bindphone?token='+this.props.token)
+                    browserHistory.push('/wxpurchase/wxcenter/build/bindphone?token='+this.props.token)
                 }
                 else{
                     // window.location.href =`http://activities.test.sanqimei.com/new-personality/index.html?userId=${this.props.userId}&type=1`
@@ -36,14 +36,14 @@ class FixFoot extends React.Component {
             })
 
         }
-        else if(this.props.type ===3){
+        else if(this.props.buttonTyle.type ===3){
             layer.open({
-                content: "该商品已被抢完"
+                content: this.props.buttonTyle.info
                 ,skin: 'msg'
                 ,time: 2
             });
         }
-        else if(this.props.type ===4){
+        else if(this.props.buttonTyle.type ===4){
             layer.open({
                 content: '您已成功购买该商品，下载APP，立即预约体验吧~'
                 ,btn: [ '去下载','取消']
@@ -57,23 +57,23 @@ class FixFoot extends React.Component {
     }
 
     render() {
-        let buyButton=""
-        console.log(this.props.type);
-        if(this.props.type ===1){
-            buyButton =`活动有效期：${this.props.startTime} 至 ${this.props.endTime}`;
-        }else if(this.props.type ===2){
-            buyButton =`立即购买`;
-        }
-        else if(this.props.type ===3){
-            buyButton =`已抢完`;
-        }
-        else if(this.props.type ===4){
-            buyButton =`已购买`;
-        }
+        let buyButton="";
+        console.log(this.props.buttonTyle.type);
+        // if(this.props.buttonTyle.type ===1){
+        //     buyButton =`活动有效期：${this.props.buttonTyle.info}`;
+        // }else if(this.props.buttonTyle.type ===2){
+        //     buyButton =this.props.buttonTyle.info;
+        // }
+        // else if(this.props.buttonTyle.type ===3){
+        //     buyButton =this.props.buttonTyle.info;
+        // }
+        // else if(this.props.buttonTyle.type ===4){
+        //     buyButton =`${this.props.buttonTyle.info}`;
+        // }
         return (
             <div className="m-fixFoot">
                 <div className="btns">
-                    <span onClick={this.check.bind(this)}> {buyButton}</span>
+                    <span onClick={this.check.bind(this)}> {this.props.buttonTyle.info}</span>
                 </div>
             </div>
         )

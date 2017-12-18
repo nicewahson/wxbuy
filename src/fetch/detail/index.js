@@ -1,8 +1,8 @@
 import { get } from '../get'
 import config from '../../util'
 
-export function getDetailInfo(spuId) {
-   const result = get(config.host+'/life/getSpuDetailForShare?spuId=' + spuId)
+export function getDetailInfo(spuId,activityId,storeId) {
+   const result = get(config.host+'/webActivity/getSpuInfo?spuId=' + spuId+'&activityId='+activityId+'&storeId='+storeId)
    return result
 }
 

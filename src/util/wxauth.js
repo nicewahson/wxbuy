@@ -10,7 +10,10 @@ const wx = window.wx
 function getWxConfig(url,shareTitle){
     $ajax('/free/getWeChatInfo',{url:url},function(res){
         if(res.status === '1'){
-            var data = res.result
+            var data = res.result;
+            console.log(data);
+            sessionStorage.setItem('appId', JSON.stringify(data.appId));
+            sessionStorage.setItem('wxToken', JSON.stringify(data.signature))
             // if(getQueryString('state') == '1'){
             //     let code = getQueryString('code')
             //     $ajax('/oauth/getAccessToken', {code}, function(res){

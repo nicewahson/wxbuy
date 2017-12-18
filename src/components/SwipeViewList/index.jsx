@@ -1,26 +1,34 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Slider from 'react-slick'
+import {browserHistory} from 'react-router';
+import {getData, getQueryString, $ajax} from '../../fetch/getData'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style.scss'
 import Logo from '../../static/img/400.png'
-
+import $ from 'jquery'
 let type =["1", "2","3"];
+
 class SwipeViewList extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state={
-      activeIndex:1
+      activeIndex:1,
+    }
+  }
+    componentDidMount() {
+
     }
 
-
-  }
   render() {
+
     let swipeImgs = this.props.swipeImgs;
+    let activestatus = this.props.activestatus;
+    console.log(swipeImgs);
     let settings = {
-      dots: false,
+      dots: true,
       infinite: false,
       speed: 300,
       cssEase: 'linear',
@@ -31,45 +39,39 @@ class SwipeViewList extends React.Component {
         this.setState({activeIndex: currentSlide+1})
       }
     };
-      // let swipeImgsLi = swipeImgs.map((item, index) => (
-      //           <li key={index}>
-      //             <div>asdsd</div>
-      //             <div>asdsd</div>
-      //             <div>asdsd</div>
-      //             <div>asdsd</div>
-      //           </li>
-      // ));
-      let swipeImgsLi = (<li>
-            <div className="ml-img"><img src={Logo}/> </div>
-            <div className="ml-title"><b>【头皮面膜-面膜防脱】</b>固本生源 精油防脱 稳固发根深</div>
+      let swipeImgsLi =swipeImgs && swipeImgs.map((item, index) => (
+          <div className="sw-listpic" key={index}>
+            <div className="ml-img"><img src={item.spuPic}/> </div>
+            <div className="ml-title"><b>{item.spuName}</b></div>
             <div className="ml-price">
               <div className="price">
-                <span className="cx">￥<b>3.7 </b></span>
-                <span className="yj"><del>￥37</del></span>
+                <span className="cx">￥<b>{item.activityPrice} </b></span>
+                <span className="yj"><del>￥{item.spuPrice}</del></span>
               </div>
-                {/*{*/}
-                    {/*item.type==1 &&*/}
-                    {/*<div className="nowbuy">*/}
-                    {/*<a href="">立即抢购</a>*/}
-                    {/*<span>仅剩余10份</span>*/}
-                  {/*</div>*/}
-                {/*}*/}
-                {/*{*/}
-                  {/*item.type==2 && <div className="overbuy">*/}
-                    {/*<span>已抢完</span>*/}
-                  {/*</div>*/}
-                {/*}*/}
-                {/*{*/}
-                  {/*item.type==3 && <div className="overbuy">*/}
-                    {/*<span>已购买</span>*/}
-                  {/*</div>*/}
-                {/*}*/}
-              <div className="overbuy">
-                  <span>已购买</span>
-              </div>
+                {
+                    item.state==1 &&
+                    <div className="nowbuy">
+                    <a onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>马上抢</a>
+                    <div className="clearfix"></div>
+                    <div className="lastnum">
+                      <span className="sy">仅剩余{item.number}份</span>
+                      <div className="progressBar"><div className="bar" style={{width:item.number/100*100+"%"}}><span className="sy-bar">{item.number}</span></div></div>
+                    </div>
+                  </div>
+                }
+                {
+                  item.state==2 && <div className="overbuy">
+                    <span>已抢完</span>
+                  </div>
+                }
+                {
+                  item.state==3 && <div className="overbuy">
+                    <span>已购买</span>
+                  </div>
+                }
             </div>
               {
-                  {Logo} == 4?
+                  this.props.activestatus == 4?
                 <div className="active-over">
                   <span>活动已结束</span>
                 </div>
@@ -77,22 +79,28 @@ class SwipeViewList extends React.Component {
                       ""
               }
 
-          </li>
-      );
+          </div>
+      ));
 
       return (
       <div className="list-swipe">
-        {/*{swipeImgs.length?*/}
-            <ul>
-                {swipeImgsLi}
-            </ul>
-         {/*:<div></div>*/}
-        {/*}*/}
-         
+        <div className="m-swipe">
+            {swipeImgsLi.length?
+                <div className="m-swipe-container">
+                  <Slider {...settings}>
+                      {
+                          swipeImgsLi
+                      }
+                  </Slider>
+                </div>
+                :<div></div>
+            }
+
+        </div>
       </div>
 
     )
   }
 }
-
+SwipeViewList.defaultProps={swipeImgs:[]};
 export default SwipeViewList

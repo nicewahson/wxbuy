@@ -1,0 +1,75 @@
+.list-box{
+  background-color:#F8F8F8 ;
+}
+.sc-bottom{
+  margin-top: 36px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+}
+.slick-dots{
+  bottom: -30px;
+  li{
+    margin: 0px;
+    button{
+
+    }
+  }
+}
+.sc-shop{
+  line-height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+.sc-phone{
+  line-height: 40px;
+  margin: 0 10px;
+  font-size: 14px;
+  border-top: 1px solid #F8F8F8;
+  span{
+    font-weight: bold;
+  }
+  a{
+    float: right;
+    img{
+      width: 16px;
+      vertical-align: middle;
+    }
+  }
+}
+.sc-address{
+  line-height: 40px;
+  margin: 0 10px;
+  font-size: 14px;
+  border-top: 1px solid #F8F8F8;
+  span{
+    font-weight: bold;
+  }
+  a{
+    width: 100%;
+    display: block;
+    .dw{
+     margin-right: 10px;
+      width: 14px;
+      vertical-align: middle;
+    }
+    .ri{
+      float: right;
+      margin-top: 12px;
+      width: 6px;
+      vertical-align: middle;
+    }
+  }
+}
+.buy-info{
+  background-color: #fff;
+  margin-top: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+  .sc-shop{
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+  img{
+    width: 100%;
+  }
+}

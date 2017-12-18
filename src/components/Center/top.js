@@ -5,8 +5,8 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import SwipeView from '../../components/SwipeView';
-import {getTopBanner} from '../../fetch/commonApi'
-
+import {getData, getQueryString, $ajax} from '../../fetch/getData'
+const layer =window.layer
 
 class Top extends React.Component{
     constructor(props, context) {
@@ -14,28 +14,36 @@ class Top extends React.Component{
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
             picList:[],
+            openId:"",
             token:"",
-            spuId:"",
-            userId:""
+            storeId:"",
+            activityId:""
         }
     }
     componentDidMount() {
-        // console.log(config.getNowFormatDate());
-        const result = getTopBanner(this.state.spuId)
-        result.then(res => {
-            return res.json()
-        }).then(json => {
-            if (json.status === '1') {
+        let url = '/webActivity/getActivityInfo';
+        (async () => {
+            let res = await getData(url, 'POST', {storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:sessionStorage.getItem("appId"),wxToken:sessionStorage.getItem("wxToken")});
+
+
+            if (res.status == '1') {
+                layer.open({
+                    content: res.errorMsg
+                    ,skin: 'msg'
+                    ,time: 2
+                });
                 this.setState({
-                    picList: json.result.picList,
-                })
-                //this.refresh(json.result.startTime,json.result.endTime)
+                    picList:res.result.bannnerList
+                });
             } else {
-                console.log(json.errorMsg)
+                layer.open({
+                    content: res.errorMsg
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+
             }
-        }).catch(ex => {
-            console.log(ex.message)
-        })
+        })()
 
     }
     render(){
