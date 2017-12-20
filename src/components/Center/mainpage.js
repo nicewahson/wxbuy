@@ -5,9 +5,10 @@ import React from 'react'
 
 import Top from './top';
 import Middle from './middle';
+import {config} from '../../config'
 //
 //
-import {getWxConfig} from '../../util/wxauth'
+import {getWxConfig,wxShareReady} from '../../util/wxauth'
 import Bottom from './bottom'
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
 
@@ -25,18 +26,13 @@ class Main extends React.Component{
         }
     }
     componentWillMount(){
-        this.maindata((title)=>{
-            let url = window.location.href;
-            // let title = '37美长沙芙蓉德政园润心苑店'
-            getWxConfig(url, title, ()=>{
-                this.setState({
-                    authorized: true
-                },()=>{
-                    this.maindata();
-                })
+        let url = window.location.href;
+        let title = '37美长沙芙蓉德政园润心苑店'
+        getWxConfig(url, title, ()=>{
+            this.setState({
+                authorized: true
             })
-        });
-
+        })
     }
     componentDidMount() {
             if (getQueryString('payok') == 1) {
@@ -51,11 +47,11 @@ class Main extends React.Component{
                 });
             }
 
-
+        this.maindata();
 
     }
 
-    maindata(cb){
+    maindata(){
         let _this= this;
         let url = '/webActivity/getActivityInfo';
         if(sessionStorage.getItem("accessinfo")) {
@@ -75,7 +71,8 @@ class Main extends React.Component{
                         endTime: res.result.info.endTime,
                         storeInfo: res.result.storeInfo
                     });
-                    cb && cb(res.result.storeInfo.title)
+                    let title= res.result.storeInfo.title
+                    wxShareReady(title, title + config.shareContent, config.shareLogo);
                 } else {
                     layer.open({
                         content: res.errorMsg

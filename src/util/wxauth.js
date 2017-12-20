@@ -156,4 +156,4 @@ function wxShareReady(shareTitle, shareContent, shareLogo) {
     });
 }
 
-export {getWxConfig}
+export {getWxConfig, wxShareReady}
