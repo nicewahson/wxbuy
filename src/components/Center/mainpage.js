@@ -3,11 +3,11 @@
  */
 import React from 'react'
 
-import Top from './top';
-import Middle from './middle';
-
-
-import Bottom from './bottom'
+// import Top from './top';
+// import Middle from './middle';
+//
+//
+// import Bottom from './bottom'
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
 
 
@@ -24,65 +24,60 @@ class Main extends React.Component{
         }
     }
     componentWillMount(){
-
+        let url = window.location.href;
+        let title = '37美长沙芙蓉德政园润心苑店'
+        getWxConfig(url, title)
     }
-    // auth(){
-    //     this.setState({authorized:true})
-    // }
     componentDidMount() {
 
-        // window.location.reload()
-
-
-        if(sessionStorage.getItem("accessinfo")) {
-
-
-            if (getQueryString('payok') == 1) {
-                layer.open({
-                    content: '您已成功购买该商品，下载APP，立即预约体验吧~'
-                    , btn: ['去下载', '取消']
-                    , yes: function (index) {
-                        window.location.href = 'https://app.sanqimei.com/upgrade/index'
-                    }, no: function (index) {
-                        layer.close(index);
-                    }
-                });
-            }
-            let url = '/webActivity/getActivityInfo';
-            (async () => {
-                let res = await getData(url, 'POST', {
-                    storeId: getQueryString('storeId'),
-                    activityId: getQueryString('activityId'),
-                    openId: JSON.parse(sessionStorage.getItem("accessinfo")).openid,
-                    wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
-                });
-
-
-                if (res.status == '1') {
-                    this.setState({
-                        startTime: res.result.info.startTime,
-                        endTime: res.result.info.endTime,
-                        storeInfo: res.result.storeInfo
-                    });
-                } else {
-                    layer.open({
-                        content: res.errorMsg
-                        , skin: 'msg'
-                        , time: 2
-                    });
-
-                }
-            })();
-
-        }
+        // if(sessionStorage.getItem("accessinfo")) {
+        //
+        //
+        //     if (getQueryString('payok') == 1) {
+        //         layer.open({
+        //             content: '您已成功购买该商品，下载APP，立即预约体验吧~'
+        //             , btn: ['去下载', '取消']
+        //             , yes: function (index) {
+        //                 window.location.href = 'https://app.sanqimei.com/upgrade/index'
+        //             }, no: function (index) {
+        //                 layer.close(index);
+        //             }
+        //         });
+        //     }
+        //     let url = '/webActivity/getActivityInfo';
+        //     (async () => {
+        //         let res = await getData(url, 'POST', {
+        //             storeId: getQueryString('storeId'),
+        //             activityId: getQueryString('activityId'),
+        //             openId: JSON.parse(sessionStorage.getItem("accessinfo")).openid,
+        //             wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
+        //         });
+        //
+        //
+        //         if (res.status == '1') {
+        //             this.setState({
+        //                 startTime: res.result.info.startTime,
+        //                 endTime: res.result.info.endTime,
+        //                 storeInfo: res.result.storeInfo
+        //             });
+        //         } else {
+        //             layer.open({
+        //                 content: res.errorMsg
+        //                 , skin: 'msg'
+        //                 , time: 2
+        //             });
+        //
+        //         }
+        //     })();
+        //
+        // }
 
     }
     render(){
         let startTime=this.state.startTime.slice(0,10);
         let endTime=this.state.endTime.slice(0,10);
-        // if(this.state.authorized){
             return <div className="list-box">
-                <Top/>
+                {/*<Top/>*/}
                 <div className="m-tags">
                     <ul>
                         <li>
@@ -93,13 +88,10 @@ class Main extends React.Component{
                         </li>
                     </ul>
                 </div>
-                <Middle/>
+                {/*<Middle/>*/}
 
-                <Bottom storeInfo={this.state.storeInfo}/>
+                {/*<Bottom storeInfo={this.state.storeInfo}/>*/}
             </div>
-        // } else{
-        //     return null;
-        // }
 
     }
 }

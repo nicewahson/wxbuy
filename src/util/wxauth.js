@@ -3,19 +3,14 @@
  */
 import {getData, getQueryString, $ajax} from '../fetch/getData'
 import {config} from '../config'
-// import wx from 'weixin-js-sdk'
 
 const layer = window.layer
 const wx = window.wx
 
-
-function getWxConfig(url,shareTitle, cb){
-    $ajax('/free/getWeChatInfo',{url:window.location},function(res){
+function getWxConfig(url,shareTitle){
+    $ajax('/free/getWeChatInfo',{url:url},function(res){
         if(res.status === '1'){
-            var data = res.result;
-
-            sessionStorage.setItem('appId', data.appId);
-            sessionStorage.setItem('wxToken', data.signature)
+            var data = res.result
             if(getQueryString('state') == '1'){
                 let code = getQueryString('code')
                 $ajax('/oauth/getAccessToken', {code}, function(res){
@@ -23,7 +18,6 @@ function getWxConfig(url,shareTitle, cb){
 
                     }else{
                         sessionStorage.setItem('accessinfo', JSON.stringify(res))
-                        cb && cb()
                     }
                 }, function(res){
                     // throw new Error('error main')
@@ -33,21 +27,16 @@ function getWxConfig(url,shareTitle, cb){
                         ,time: 2
                     });
                 })
-            } else{
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=`+encodeURIComponent(url)+`&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
-                // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.204%3a3000%2fwxpurchase%2fwxcenter%2fbuild%2flist%3fstoreId%3d117%26activityId%3d5&scope=snsapi_userinfo&connect_redirect=1&state=1`
+            }else{
+                let encodrUrl = encodeURIComponent('http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId=117&activityId=5')
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=${encodrUrl}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
+                // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.203%3a3000%2fwxcenter&scope=snsapi_userinfo&connect_redirect=1&state=1`
             }
-            // let accessinfo={
-            //     access_token:"5_hc0oj0lU6XhZ71zGMaZ22tNuVP-1_KstT4kQUIfC_i86vNQXfRYXwhUG0IoX3LMXq6x_g0zl1X6iY8l_Aag8wA",
-            //     openid:"oiEdy1YKhDrFqWAnog5BH26d4Hag",
-            // };
-            // sessionStorage.setItem('accessinfo', JSON.stringify(accessinfo))
+
             //初始化微信配置
-            // let data = JSON.parse(sessionStorage.getItem('weChatInfo'));
             wxShareConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             //分享准备
             wxShareReady(shareTitle, shareTitle + config.shareContent, config.shareLogo);
-            // cb();
         }
     })
 }
@@ -60,8 +49,9 @@ function getWxConfig(url,shareTitle, cb){
  * @param signature
  */
 function wxShareConfig(appId, timestamp, nonceStr, signature) {
+    console.log(wx, window)
     wx.config({
-        debug: true,
+        debug: false,
         appId: appId,
         timestamp: timestamp,
         nonceStr: nonceStr,
@@ -77,7 +67,7 @@ function wxShareConfig(appId, timestamp, nonceStr, signature) {
         ]
     });
     wx.error(function (res) {
-        console.log(res.errMsg, 'here wx err');
+        console.log(res.errMsg);
     });
 }
 
