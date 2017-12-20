@@ -23,11 +23,7 @@ class Middle extends React.Component{
 
 
             if (res.status == '1') {
-                layer.open({
-                    content: res.errorMsg
-                    ,skin: 'msg'
-                    ,time: 2
-                });
+
                 this.setState({
                     buyList:res.result.lstSpu,
                     activestatus:res.result.info.endTime

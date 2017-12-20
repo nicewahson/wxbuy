@@ -28,11 +28,6 @@ class Top extends React.Component{
 
 
             if (res.status == '1') {
-                layer.open({
-                    content: res.errorMsg
-                    ,skin: 'msg'
-                    ,time: 2
-                });
                 this.setState({
                     picList:res.result.bannnerList
                 });

@@ -24,15 +24,18 @@ class Main extends React.Component{
         }
     }
     componentWillMount(){
-        let serveurl ="http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId="+getQueryString('storeId')+"&activityId="+getQueryString('activityId');
-        let url = encodeURIComponent(serveurl);
-        let title = '37美长沙芙蓉德政园润心苑店'
-        getWxConfig(url, title,this.auth.bind(this))
+
     }
     auth(){
         this.setState({authorized:true})
     }
     componentDidMount() {
+        let enurl ="http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId="+getQueryString('storeId')+"&activityId="+getQueryString('activityId');
+        // let url = encodeURIComponent(serveurl);
+        let title = '37美长沙芙蓉德政园润心苑店'
+        getWxConfig(enurl, title,this.auth.bind(this))
+
+
         if(getQueryString('payok')==1){
             layer.open({
                 content: '您已成功购买该商品，下载APP，立即预约体验吧~'
@@ -50,11 +53,6 @@ class Main extends React.Component{
 
 
             if (res.status == '1') {
-                layer.open({
-                    content: res.errorMsg
-                    ,skin: 'msg'
-                    ,time: 2
-                });
                 this.setState({
                     startTime:res.result.info.startTime,
                     endTime:res.result.info.endTime,
