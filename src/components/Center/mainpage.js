@@ -34,9 +34,6 @@ class Main extends React.Component{
         })
     }
     componentDidMount() {
-
-
-
             if (getQueryString('payok') == 1) {
                 layer.open({
                     content: '您已成功购买该商品，下载APP，立即预约体验吧~'
@@ -49,33 +46,33 @@ class Main extends React.Component{
                 });
             }
             let url = '/webActivity/getActivityInfo';
-        if(sessionStorage.getItem("accessinfo")) {
+            if(sessionStorage.getItem("accessinfo")) {
 
-            (async () => {
-                let res = await getData(url, 'POST', {
-                    storeId: getQueryString('storeId'),
-                    activityId: getQueryString('activityId'),
-                    openId: JSON.parse(sessionStorage.getItem("accessinfo")).openid,
-                    wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
-                });
-
-
-                if (res.status == '1') {
-                    this.setState({
-                        startTime: res.result.info.startTime,
-                        endTime: res.result.info.endTime,
-                        storeInfo: res.result.storeInfo
+                (async () => {
+                    let res = await getData(url, 'POST', {
+                        storeId: getQueryString('storeId'),
+                        activityId: getQueryString('activityId'),
+                        openId: JSON.parse(sessionStorage.getItem("accessinfo")).openid,
+                        wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
                     });
-                } else {
-                    layer.open({
-                        content: res.errorMsg
-                        , skin: 'msg'
-                        , time: 2
-                    });
+                    console.log(123);
 
-                }
-            })();
-        }
+                    if (res.status == '1') {
+                        this.setState({
+                            startTime: res.result.info.startTime,
+                            endTime: res.result.info.endTime,
+                            storeInfo: res.result.storeInfo
+                        });
+                    } else {
+                        layer.open({
+                            content: res.errorMsg
+                            , skin: 'msg'
+                            , time: 2
+                        });
+
+                    }
+                })();
+            }
 
 
     }
