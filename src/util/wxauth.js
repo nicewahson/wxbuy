@@ -42,7 +42,7 @@ function getWxConfig(url,shareTitle, cb){
             // };
             // sessionStorage.setItem('accessinfo', JSON.stringify(accessinfo))
             //初始化微信配置
-            let {data} = JSON.parse(sessionStorage.getItem('weChatInfo'));
+            let data = JSON.parse(sessionStorage.getItem('weChatInfo'));
             wxShareConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             //分享准备
             wxShareReady(shareTitle, shareTitle + config.shareContent, config.shareLogo);
