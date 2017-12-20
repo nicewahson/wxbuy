@@ -23,7 +23,7 @@ class Main extends React.Component{
         }
     }
     componentWillMount(){
-        let url = window.location.href;
+        let url = encodeURIComponent(window.location.href);
         let title = '37美长沙芙蓉德政园润心苑店'
         getWxConfig(url, title)
     }
