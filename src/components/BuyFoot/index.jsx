@@ -52,7 +52,7 @@ class FixFoot extends React.Component {
                                 appId: res.result.appId,
                                 partnerid: res.result.partnerid,
                                 success: function (res) {
-                                    browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&payok=1')
+                                    browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&payok=1'+'&state=1')
                                 }
                             });
                         }
