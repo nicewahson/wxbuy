@@ -31,47 +31,47 @@ class Main extends React.Component{
     }
     componentDidMount() {
 
-        // if(sessionStorage.getItem("accessinfo")) {
-        //
-        //
-        //     if (getQueryString('payok') == 1) {
-        //         layer.open({
-        //             content: '您已成功购买该商品，下载APP，立即预约体验吧~'
-        //             , btn: ['去下载', '取消']
-        //             , yes: function (index) {
-        //                 window.location.href = 'https://app.sanqimei.com/upgrade/index'
-        //             }, no: function (index) {
-        //                 layer.close(index);
-        //             }
-        //         });
-        //     }
-        //     let url = '/webActivity/getActivityInfo';
-        //     (async () => {
-        //         let res = await getData(url, 'POST', {
-        //             storeId: getQueryString('storeId'),
-        //             activityId: getQueryString('activityId'),
-        //             openId: JSON.parse(sessionStorage.getItem("accessinfo")).openid,
-        //             wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
-        //         });
-        //
-        //
-        //         if (res.status == '1') {
-        //             this.setState({
-        //                 startTime: res.result.info.startTime,
-        //                 endTime: res.result.info.endTime,
-        //                 storeInfo: res.result.storeInfo
-        //             });
-        //         } else {
-        //             layer.open({
-        //                 content: res.errorMsg
-        //                 , skin: 'msg'
-        //                 , time: 2
-        //             });
-        //
-        //         }
-        //     })();
-        //
-        // }
+        if(sessionStorage.getItem("accessinfo")) {
+
+
+            if (getQueryString('payok') == 1) {
+                layer.open({
+                    content: '您已成功购买该商品，下载APP，立即预约体验吧~'
+                    , btn: ['去下载', '取消']
+                    , yes: function (index) {
+                        window.location.href = 'https://app.sanqimei.com/upgrade/index'
+                    }, no: function (index) {
+                        layer.close(index);
+                    }
+                });
+            }
+            let url = '/webActivity/getActivityInfo';
+            (async () => {
+                let res = await getData(url, 'POST', {
+                    storeId: getQueryString('storeId'),
+                    activityId: getQueryString('activityId'),
+                    openId: JSON.parse(sessionStorage.getItem("accessinfo")).openid,
+                    wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
+                });
+
+
+                if (res.status == '1') {
+                    this.setState({
+                        startTime: res.result.info.startTime,
+                        endTime: res.result.info.endTime,
+                        storeInfo: res.result.storeInfo
+                    });
+                } else {
+                    layer.open({
+                        content: res.errorMsg
+                        , skin: 'msg'
+                        , time: 2
+                    });
+
+                }
+            })();
+
+        }
 
     }
     render(){
