@@ -29,7 +29,8 @@ function getWxConfig(url,shareTitle, cb){
                     });
                 })
             }else{
-                let encodrUrl = encodeURIComponent('http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId=117&activityId=5')
+                let url='http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId='+getQueryString('storeId')+'&activityId='+getQueryString('activityId')
+                let encodrUrl = encodeURIComponent(url);
                 window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=${encodrUrl}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
                 // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.203%3a3000%2fwxcenter&scope=snsapi_userinfo&connect_redirect=1&state=1`
             }

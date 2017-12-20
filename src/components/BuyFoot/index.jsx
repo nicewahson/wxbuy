@@ -52,7 +52,17 @@ class FixFoot extends React.Component {
                                 appId: res.result.appId,
                                 partnerid: res.result.partnerid,
                                 success: function (res) {
-                                    browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&payok=1'+'&state=1')
+                                    layer.open({
+                                        content: '您已成功购买该商品，下载APP，立即预约体验吧~'
+                                        , btn: ['去下载', '取消']
+                                        , yes: function (index) {
+                                            window.location.href = 'https://app.sanqimei.com/upgrade/index'
+                                        }, no: function (index) {
+                                            browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
+                                        }
+                                    });
+
+
                                 }
                             });
                         }
