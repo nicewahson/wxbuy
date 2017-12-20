@@ -137,7 +137,7 @@ class Home extends React.Component {
                             appId: res.result.appId,
                             partnerid: res.result.partnerid,
                             success: function (res) {
-                                // 支付成功后的回调函数
+                                browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&payok=1')
                             }
                         });
                     }

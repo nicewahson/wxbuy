@@ -23,8 +23,8 @@ class Bottom extends React.Component{
     }
     openLocation(){
         wx.openLocation({
-            latitude: this.props.storeInfo.lat, // 纬度，浮点数，范围为90 ~ -90
-            longitude: this.props.storeInfo.lon, // 经度，浮点数，范围为180 ~ -180。
+            latitude: JSON.parse(this.props.storeInfo.lat), // 纬度，浮点数，范围为90 ~ -90
+            longitude: JSON.parse(this.props.storeInfo.lon), // 经度，浮点数，范围为180 ~ -180。
             name: this.props.storeInfo.name, // 位置名
             address: this.props.storeInfo.address, // 地址详情说明
             scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
