@@ -9,12 +9,12 @@ const layer = window.layer
 
 
 function getWxConfig(url,shareTitle, cb){
-    // $ajax('/free/getWeChatInfo',{url:'http://activities.sanqimei.com/wxpurchase/wxcenter/build/list'},function(res){
-    //     if(res.status === '1'){
-    //         var data = res.result;
-    //
-    //         sessionStorage.setItem('appId', data.appId);
-    //         sessionStorage.setItem('wxToken', data.signature)
+    $ajax('/free/getWeChatInfo',{url:encodeURIComponent('http://activities.sanqimei.com/wxpurchase/wxcenter/build/list')},function(res){
+        if(res.status === '1'){
+            var data = res.result;
+
+            sessionStorage.setItem('appId', data.appId);
+            sessionStorage.setItem('wxToken', data.signature)
             if(getQueryString('state') == '1'){
                 let code = getQueryString('code')
                 $ajax('/oauth/getAccessToken', {code}, function(res){
@@ -31,24 +31,23 @@ function getWxConfig(url,shareTitle, cb){
                         ,time: 2
                     });
                 })
+            } else{
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=`+encodeURIComponent(url)+`&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
+                // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.204%3a3000%2fwxpurchase%2fwxcenter%2fbuild%2flist%3fstoreId%3d117%26activityId%3d5&scope=snsapi_userinfo&connect_redirect=1&state=1`
             }
-    // else{
-    //             window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=`+encodeURIComponent(url)+`&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
-    //             // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.204%3a3000%2fwxpurchase%2fwxcenter%2fbuild%2flist%3fstoreId%3d117%26activityId%3d5&scope=snsapi_userinfo&connect_redirect=1&state=1`
-    //         }
             // let accessinfo={
             //     access_token:"5_hc0oj0lU6XhZ71zGMaZ22tNuVP-1_KstT4kQUIfC_i86vNQXfRYXwhUG0IoX3LMXq6x_g0zl1X6iY8l_Aag8wA",
             //     openid:"oiEdy1YKhDrFqWAnog5BH26d4Hag",
             // };
             // sessionStorage.setItem('accessinfo', JSON.stringify(accessinfo))
             //初始化微信配置
-            let data = JSON.parse(sessionStorage.getItem('weChatInfo'));
+            // let data = JSON.parse(sessionStorage.getItem('weChatInfo'));
             wxShareConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             //分享准备
             wxShareReady(shareTitle, shareTitle + config.shareContent, config.shareLogo);
             // cb();
-    //     }
-    // })
+        }
+    })
 }
 
 /**yi
