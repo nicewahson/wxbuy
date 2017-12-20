@@ -7,6 +7,7 @@ import React from 'react'
 // import Middle from './middle';
 //
 //
+import {getWxConfig} from '../../util/wxauth'
 // import Bottom from './bottom'
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
 
