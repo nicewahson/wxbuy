@@ -78,7 +78,7 @@ class Main extends React.Component{
         let startTime=this.state.startTime.slice(0,10);
         let endTime=this.state.endTime.slice(0,10);
             return <div className="list-box">
-                {/*<Top/>*/}
+                <Top/>
                 <div className="m-tags">
                     <ul>
                         <li>
@@ -89,7 +89,7 @@ class Main extends React.Component{
                         </li>
                     </ul>
                 </div>
-                {/*<Middle/>*/}
+                <Middle/>
 
                 {/*<Bottom storeInfo={this.state.storeInfo}/>*/}
             </div>
