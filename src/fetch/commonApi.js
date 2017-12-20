@@ -29,7 +29,7 @@ export function getShopDesc(spuId,pageNumber,pageSize) {
  * @returns 
  */
 export function getShopDiarys(spuId,pageNumber,pageSize){
-    const result = get(`${config.host}/webActivity/getSpuDetail?spuId=${spuId}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
+    const result = get(`${config.host}/webActivity/getRelationDiarysBySpu?spuId=${spuId}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
      //const result = get('/life/getSpuDetail?spuId=' + spuId + '&pageNumber=' + pageNumber + '&pageSize='+pageSize);
      return result
 }

@@ -106,6 +106,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "react-addons-pure-render-mixin": "^15.6.0"
   },
   "proxy": "http://app-server.dev.sanqimei.com"

@@ -22,8 +22,9 @@ class Top extends React.Component{
     }
     componentDidMount() {
         let url = '/webActivity/getActivityInfo';
+        console.log(sessionStorage.getItem("accessinfo"));
         (async () => {
-            let res = await getData(url, 'POST', {storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:sessionStorage.getItem("appId"),wxToken:sessionStorage.getItem("wxToken")});
+            let res = await getData(url, 'POST', {storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:JSON.parse(sessionStorage.getItem("accessinfo")).openid,wxToken:JSON.parse(sessionStorage.getItem("accessinfo")).access_token});
 
 
             if (res.status == '1') {

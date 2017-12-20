@@ -26,7 +26,12 @@ class SwipeViewList extends React.Component {
 
     let swipeImgs = this.props.swipeImgs;
     let activestatus = this.props.activestatus;
-    console.log(swipeImgs);
+    let timestamp1 = Date.parse(new Date(activestatus));
+      timestamp1 = timestamp1 / 1000;
+      console.log(timestamp1);
+      let timestamp2 = Date.parse(new Date());
+      timestamp2 = timestamp2 / 1000;
+      console.log(timestamp2);
     let settings = {
       dots: true,
       infinite: false,
@@ -35,9 +40,9 @@ class SwipeViewList extends React.Component {
       arrows: false,
       className:'m-carousel',
       touchThreshold:10,
-      afterChange:(currentSlide) =>{
-        this.setState({activeIndex: currentSlide+1})
-      }
+        // autoplay:true,
+        // autoplaySpeed:3000
+
     };
       let swipeImgsLi =swipeImgs && swipeImgs.map((item, index) => (
           <div className="sw-listpic" key={index}>
@@ -51,11 +56,11 @@ class SwipeViewList extends React.Component {
                 {
                     item.state==1 &&
                     <div className="nowbuy">
-                    <a onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>马上抢</a>
+                    <button className="msc" onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>马上抢</button>
                     <div className="clearfix"></div>
                     <div className="lastnum">
                       <span className="sy">仅剩余{item.number}份</span>
-                      <div className="progressBar"><div className="bar" style={{width:item.number/100*100+"%"}}><span className="sy-bar">{item.number}</span></div></div>
+                      <div className="progressBar"><div className="bar" style={{width:item.number/item.totalLimitNum*100+"%"}}><span className="sy-bar">{item.number}</span></div></div>
                     </div>
                   </div>
                 }
@@ -70,8 +75,9 @@ class SwipeViewList extends React.Component {
                   </div>
                 }
             </div>
+
               {
-                  this.props.activestatus == 4?
+                  timestamp1-timestamp2<0?
                 <div className="active-over">
                   <span>活动已结束</span>
                 </div>
@@ -81,15 +87,25 @@ class SwipeViewList extends React.Component {
 
           </div>
       ));
-
+      console.log(swipeImgsLi);
+      let twoswipe="";
+      for(let i=0; i<swipeImgsLi.length; i=i+2){
+        console.log(i,swipeImgsLi[i]);
+          twoswipe= <div>
+             {swipeImgsLi[i]}
+             {swipeImgsLi[i+1]}
+         </div>
+       }
+       console.log(twoswipe);
       return (
       <div className="list-swipe">
-        <div className="m-swipe">
+
+        <div  className="m-swipe">
             {swipeImgsLi.length?
                 <div className="m-swipe-container">
                   <Slider {...settings}>
                       {
-                          swipeImgsLi
+                          twoswipe
                       }
                   </Slider>
                 </div>

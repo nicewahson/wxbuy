@@ -19,7 +19,7 @@ class Middle extends React.Component{
     componentDidMount() {
         let url = '/webActivity/getActivityInfo';
         (async () => {
-            let res = await getData(url, 'POST', {storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:"",wxToken:""});
+            let res = await getData(url, 'POST', {storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:JSON.parse(sessionStorage.getItem("accessinfo")).openid,wxToken:JSON.parse(sessionStorage.getItem("accessinfo")).access_token});
 
 
             if (res.status == '1') {
@@ -30,7 +30,7 @@ class Middle extends React.Component{
                 });
                 this.setState({
                     buyList:res.result.lstSpu,
-                    activestatus:res.status
+                    activestatus:res.result.info.endTime
                 });
             } else {
                 layer.open({

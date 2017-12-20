@@ -1,4 +1,13 @@
-
+.m-swipe-container{
+.slick-track{
+  pointer-events: none;
+}
+  .nowbuy{
+    a{
+      pointer-events:auto;
+    }
+  }
+}
 .detail{
   max-width: 100%;
   .slick-slide{

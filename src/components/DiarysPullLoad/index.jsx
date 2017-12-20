@@ -84,6 +84,7 @@ class DiarysPullLoad extends React.Component {
     }
     render() {
         let {dyList} = this.props;
+        console.log(dyList);
         return (
             <div id="m-dy-pull-load" className="clear-fix">
                 {

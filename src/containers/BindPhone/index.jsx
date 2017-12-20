@@ -1,10 +1,12 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import {browserHistory} from 'react-router';
+import {getData, getQueryString, $ajax} from '../../fetch/getData'
 import logo from '../../static/img/logo.png'
 import {sentcode,nowBind} from '../../fetch/commonApi'
 import $ from 'jquery'
 import './style.scss'
-
+const wx = window.wx
 const layer = window.layer
 
 
@@ -54,36 +56,36 @@ class Home extends React.Component {
 
          }
          console.log(telStr);
-         const userBind = sentcode(telStr);
-         userBind.then(res => {
-             return res.json()
-         }).then(json => {
-             if(json.status === '0'){
+         let url = '/webActivity/sendMessage';
+         (async () => {
+             let res = await getData(url, 'POST', {phone:telStr,spuId:getQueryString('spuId'),storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:JSON.parse(sessionStorage.getItem("accessinfo")).openid,wxToken:JSON.parse(sessionStorage.getItem("accessinfo")).access_token});
+
+
+             if(res.status == '1'){
                  $('#getcode').attr('disabled','true').text('30s').addClass('get')
 
-                     this.counts();
+                 this.counts();
                  this.setState({sentDone:false})
                  layer.open({
                      content: '验证码已发送，请注意查收'
                      ,skin: 'msg'
                      ,time: 2
                  });
-             } else if(json.status === '2'){
+             } else if(res.status == '0'){
                  layer.open({
-                     content: '该活动仅限新用户'
+                     content: res.errorMsg
                      ,skin: 'msg'
                      ,time: 2
                  });
              }else{
                  layer.open({
-                     content: "网络错误"
+                     content: res.errorMsg
                      ,skin: 'msg'
                      ,time: 2
                  });
              }
-         }).catch(ex => {
-             console.log(ex.message);
-         })
+         })()
+
      }
     submitStorestock() {
         console.log($('input[name="phone"]').val());
@@ -114,23 +116,46 @@ class Home extends React.Component {
             });
             return false
         }
-        const userBind = nowBind(telStr,code);
-        userBind.then(res => {
-            return res.json()
-        }).then(json => {
-            if(json.status === '1'){
-                // window.location.href =`http://activities.test.sanqimei.com/new-personality/index.html?userId=${this.props.userId}&type=1`
-            }
-            else{
+        let url = '/webActivity/updateMessage';
+        (async () => {
+            let res = await getData(url, 'POST', {phone:telStr,smsCode:code,spuId:getQueryString('spuId'),storeId:getQueryString('storeId'),activityId:getQueryString('activityId'),openId:JSON.parse(sessionStorage.getItem("accessinfo")).openid,wxToken:JSON.parse(sessionStorage.getItem("accessinfo")).access_token});
+            if(res.status == '1'){
+                this.setState({
+                    orderCode:res.result.orderCode
+                });
+                let url = 'http://app-server.dev.sanqimei.com/pay/generateOrder';
+                (async () => {
+                    let res = await getData(url, 'POST', {out_trade_no:this.state.orderCode,openid:JSON.parse(sessionStorage.getItem("accessinfo")).openid,token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,channel:3,ip:"123.12.12.123"});
+                    if (res.status == 1) {
+                        console.log(res.result);
+                        wx.chooseWXPay({
+                            timestamp:res.result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                            nonceStr: res.result.nonceStr, // 支付签名随机串，不长于 32 位
+                            package: res.result.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                            signType: res.result.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                            paySign: res.result.paySign, // 支付签名
+                            success: function (res) {
+                                // 支付成功后的回调函数
+                            }
+                        });
+                    }
+                })()
+
+            } else if(res.status == '0'){
+
                 layer.open({
-                    content: "验证码错误"
+                    content: res.errorMsg
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+            }else{
+                layer.open({
+                    content: res.errorMsg
                     ,skin: 'msg'
                     ,time: 2
                 });
             }
-        }).catch(ex => {
-            console.log(ex.message);
-        })
+        })()
     }
     render() {
         return (

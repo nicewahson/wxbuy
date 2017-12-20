@@ -1,3 +1,4 @@
+
 .list-box{
   background-color:#F8F8F8 ;
 }
@@ -7,11 +8,13 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
 }
 .slick-dots{
-  bottom: -30px;
+  bottom: -27px;
   li{
     margin: 0px;
     button{
-
+      &:before{
+        transform:scale(0.5);
+      }
     }
   }
 }

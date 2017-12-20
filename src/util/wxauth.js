@@ -7,34 +7,40 @@ import {config} from '../config'
 const layer = window.layer
 const wx = window.wx
 
+let storeId=getQueryString(storeId),
+    activityId=getQueryString(activityId);
 function getWxConfig(url,shareTitle){
     $ajax('/free/getWeChatInfo',{url:url},function(res){
         if(res.status === '1'){
             var data = res.result;
             console.log(data);
-            sessionStorage.setItem('appId', JSON.stringify(data.appId));
-            sessionStorage.setItem('wxToken', JSON.stringify(data.signature))
-            // if(getQueryString('state') == '1'){
-            //     let code = getQueryString('code')
-            //     $ajax('/oauth/getAccessToken', {code}, function(res){
-            //         if(res.errcode){
-            //
-            //         }else{
-            //             sessionStorage.setItem('accessinfo', JSON.stringify(res))
-            //         }
-            //     }, function(res){
-            //         // throw new Error('error main')
-            //         layer.open({
-            //             content: '获取微信信息异常'
-            //             ,skin: 'msg'
-            //             ,time: 2
-            //         });
-            //     })
-            // }else{
-            //     // window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=http%3a%2f%2factivities.sanqimei.com%2flottery%2fdist%2findex.html&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
-            //     window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.203%3a3000%2fwxcenter&scope=snsapi_userinfo&connect_redirect=1&state=1`
-            // }
+            sessionStorage.setItem('appId', data.appId);
+            sessionStorage.setItem('wxToken', data.signature)
+            if(getQueryString('state') == '1'){
+                let code = getQueryString('code')
+                $ajax('/oauth/getAccessToken', {code}, function(res){
+                    if(res.errcode){
 
+                    }else{
+                        sessionStorage.setItem('accessinfo', JSON.stringify(res))
+                    }
+                }, function(res){
+                    // throw new Error('error main')
+                    layer.open({
+                        content: '获取微信信息异常'
+                        ,skin: 'msg'
+                        ,time: 2
+                    });
+                })
+            }else{
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=http%3a%2f%2factivities.sanqimei.com%2fwxpurchase%2fwxcenter%2fbuild%2flist%3fstoreId%3d%24%7bstoreId%7d%26activityId%3d%24%7bactivityId%7d&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
+                // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.204%3a3000%2fwxpurchase%2fwxcenter%2fbuild%2flist%3fstoreId%3d117%26activityId%3d5&scope=snsapi_userinfo&connect_redirect=1&state=1`
+            }
+            // let accessinfo={
+            //     access_token:"5_hc0oj0lU6XhZ71zGMaZ22tNuVP-1_KstT4kQUIfC_i86vNQXfRYXwhUG0IoX3LMXq6x_g0zl1X6iY8l_Aag8wA",
+            //     openid:"oiEdy1YKhDrFqWAnog5BH26d4Hag",
+            // };
+            // sessionStorage.setItem('accessinfo', JSON.stringify(accessinfo))
             //初始化微信配置
             wxShareConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             //分享准备

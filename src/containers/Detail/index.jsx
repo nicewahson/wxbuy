@@ -71,14 +71,14 @@ class Detail extends React.Component {
             dyIndex: 0,
             dyCurPage:1,
             //token:'dcba1afe-3b74-4c0d-b5e9-ecd6bceb4045'
-            token:this.props.location.query.token,
+            token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,
             spuId:this.props.location.query.spuId,
             userId:this.props.location.query.userId
 
         }
     }
     componentDidMount() {
-        // console.log(config.getNowFormatDate());
+        console.log(this.props.location.query.token);
          const result = getDetailInfo(this.state.spuId,getQueryString('activityId'),getQueryString('storeId'))
          result.then(res => {
             return res.json()
@@ -132,7 +132,7 @@ class Detail extends React.Component {
              //     console.error('用户主页“订单列表”获取数据报错, ', ex.message)
              // }
          })
-         
+
          // const detailActivity = getDetailActivity(this.state.spuId);
          // detailActivity.then(res => {
          //    return res.json()
@@ -164,7 +164,7 @@ class Detail extends React.Component {
          }).then(json => {
              if(json.status === '1'){
                 let dyIndex =  Math.ceil(json.result.total / this.state.pageSize);
-                console.log(json.result);
+                console.log(json);
                 this.setState({
                     dyTotal:json.result.total||0,
                     dyIsLastPage:json.result.isLastPage,
@@ -193,7 +193,7 @@ class Detail extends React.Component {
                                         <span>{item.label}</span>
                                         <span>{item.content}</span>
                                         </li>
-                            }) 
+                            })
                          : <li></li>
     }
     handleClick(e){
@@ -289,7 +289,7 @@ class Detail extends React.Component {
                                 <TabPanel>
                                     <DescPullLoad
                                         index= {this.state.index}
-                                        list={this.state.list} 
+                                        list={this.state.list}
                                         serverVedio = {this.state.serverVedio}
                                         spuId = {this.state.spuId}
                                         curPage={this.state.curPage}
@@ -301,7 +301,7 @@ class Detail extends React.Component {
                                 <TabPanel>
                                     <DiarysPullLoad
                                         dyIndex= {this.state.dyIndex}
-                                        dyList={this.state.dyList} 
+                                        dyList={this.state.dyList}
                                         /* serverVedio = {this.state.serverVedio} */
                                         spuId = {this.state.spuId}
                                         dyCurPage={this.state.dyCurPage}

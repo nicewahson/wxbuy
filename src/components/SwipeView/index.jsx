@@ -19,15 +19,14 @@ class SwipeView extends React.Component {
     let swipeImgs = this.props.swipeImgs;
     let settings = {
       dots: false,
-      infinite: false,
+        infinite: true,
       speed: 300,
       cssEase: 'linear',
       arrows: false,
       className:'m-carousel',
       touchThreshold:10,
-      afterChange:(currentSlide) =>{
-        this.setState({activeIndex: currentSlide+1})
-      }
+        autoplay:true,
+        autoplaySpeed:3000
     };
     return (
       <div className="m-swipe detail">
