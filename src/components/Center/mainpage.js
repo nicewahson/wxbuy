@@ -19,14 +19,18 @@ class Main extends React.Component{
         this.state = {
             startTime:"",
             endTime:"",
-            storeInfo:{}
+            storeInfo:{},
+            authorized:false
         }
     }
     componentWillMount(){
         let serveurl ="http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId="+getQueryString('storeId')+"&activityId="+getQueryString('activityId');
         let url = encodeURIComponent(serveurl);
         let title = '37美长沙芙蓉德政园润心苑店'
-        getWxConfig(url, title)
+        getWxConfig(url, title,this.auth.bind(this))
+    }
+    auth(){
+        this.setState({authorized:true})
     }
     componentDidMount() {
         if(getQueryString('payok')==1){
@@ -70,22 +74,27 @@ class Main extends React.Component{
     render(){
         let startTime=this.state.startTime.slice(0,10);
         let endTime=this.state.endTime.slice(0,10);
-        return <div className="list-box">
-            <Top/>
-            <div className="m-tags">
-                <ul>
-                    <li>
-                        <span>活动有效期：{startTime}  至 {endTime}   </span>
-                    </li>
-                    <li className="ml">
-                        <span >仅限新用户</span>
-                    </li>
-                </ul>
-            </div>
-            <Middle/>
+        if(this.state.authorized){
+            return <div className="list-box">
+                <Top/>
+                <div className="m-tags">
+                    <ul>
+                        <li>
+                            <span>活动有效期：{startTime}  至 {endTime}   </span>
+                        </li>
+                        <li className="ml">
+                            <span >仅限新用户</span>
+                        </li>
+                    </ul>
+                </div>
+                <Middle/>
 
-            <Bottom storeInfo={this.state.storeInfo}/>
-        </div>
+                <Bottom storeInfo={this.state.storeInfo}/>
+            </div>
+        } else{
+            return null;
+        }
+
     }
 }
 
