@@ -11,7 +11,7 @@ function getWxConfig(url,shareTitle, cb){
     $ajax('/free/getWeChatInfo',{url:url},function(res){
         if(res.status === '1'){
             var data = res.result;
-            console.log(data);
+
             sessionStorage.setItem('appId', data.appId);
             sessionStorage.setItem('wxToken', data.signature)
             if(getQueryString('state') == '1'){
@@ -43,7 +43,7 @@ function getWxConfig(url,shareTitle, cb){
             wxShareConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             //分享准备
             wxShareReady(shareTitle, shareTitle + config.shareContent, config.shareLogo);
-            cb();
+            // cb();
         }
     })
 }
@@ -56,9 +56,8 @@ function getWxConfig(url,shareTitle, cb){
  * @param signature
  */
 function wxShareConfig(appId, timestamp, nonceStr, signature) {
-    console.log(wx, window)
     wx.config({
-        debug: false,
+        debug: true,
         appId: appId,
         timestamp: timestamp,
         nonceStr: nonceStr,
@@ -74,7 +73,7 @@ function wxShareConfig(appId, timestamp, nonceStr, signature) {
         ]
     });
     wx.error(function (res) {
-        console.log(res.errMsg);
+        console.log(res.errMsg, 'here wx err');
     });
 }
 

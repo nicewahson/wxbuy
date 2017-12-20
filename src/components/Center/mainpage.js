@@ -6,7 +6,7 @@ import React from 'react'
 import Top from './top';
 import Middle from './middle';
 
-import {getWxConfig} from '../../util/wxauth'
+
 import Bottom from './bottom'
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
 
@@ -26,14 +26,11 @@ class Main extends React.Component{
     componentWillMount(){
 
     }
-    auth(){
-        this.setState({authorized:true})
-    }
+    // auth(){
+    //     this.setState({authorized:true})
+    // }
     componentDidMount() {
-        let enurl ="http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId="+getQueryString('storeId')+"&activityId="+getQueryString('activityId');
-        // let url = encodeURIComponent(serveurl);
-        let title = '37美长沙芙蓉德政园润心苑店'
-        getWxConfig(enurl, title,this.auth.bind(this))
+
 
 
         if(getQueryString('payok')==1){
@@ -72,7 +69,7 @@ class Main extends React.Component{
     render(){
         let startTime=this.state.startTime.slice(0,10);
         let endTime=this.state.endTime.slice(0,10);
-        if(this.state.authorized){
+        // if(this.state.authorized){
             return <div className="list-box">
                 <Top/>
                 <div className="m-tags">
@@ -89,9 +86,9 @@ class Main extends React.Component{
 
                 <Bottom storeInfo={this.state.storeInfo}/>
             </div>
-        } else{
-            return null;
-        }
+        // } else{
+        //     return null;
+        // }
 
     }
 }

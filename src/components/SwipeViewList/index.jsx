@@ -87,7 +87,8 @@ class SwipeViewList extends React.Component {
 
           </div>
       ));
-      console.log(swipeImgsLi);
+
+
       let twoswipe="";
       for(let i=0; i<swipeImgsLi.length; i=i+2){
         console.log(i,swipeImgsLi[i]);
@@ -96,7 +97,7 @@ class SwipeViewList extends React.Component {
              {swipeImgsLi[i+1]}
          </div>
        }
-       console.log(twoswipe);
+
       return (
       <div className="list-swipe">
 
