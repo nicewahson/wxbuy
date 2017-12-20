@@ -3,9 +3,10 @@
  */
 import {getData, getQueryString, $ajax} from '../fetch/getData'
 import {config} from '../config'
-import wx from 'weixin-js-sdk'
+// import wx from 'weixin-js-sdk'
 
 const layer = window.layer
+const wx = window.wx
 
 
 function getWxConfig(url,shareTitle, cb){

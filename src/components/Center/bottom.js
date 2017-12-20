@@ -10,6 +10,7 @@ import phone from '../../static/img/phone.png'
 import dw from '../../static/img/dw.png'
 import fh from '../../static/img/fh.png'
 import buyinfo from '../../static/img/buyinfo.png'
+
 const wx = window.wx
 
 class Bottom extends React.Component{
