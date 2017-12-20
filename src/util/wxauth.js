@@ -8,7 +8,7 @@ const layer = window.layer
 const wx = window.wx
 
 function getWxConfig(url,shareTitle, cb){
-    $ajax('/free/getWeChatInfo',{url:url},function(res){
+    $ajax('/free/getWeChatInfo',{url:window.location.href.split('?')[0]},function(res){
         if(res.status === '1'){
             var data = res.result;
 
