@@ -27,7 +27,11 @@ class Main extends React.Component{
     componentWillMount(){
         let url = window.location.href;
         let title = '37美长沙芙蓉德政园润心苑店'
-        getWxConfig(url, title)
+        getWxConfig(url, title, ()=>{
+            this.setState({
+                authorized: true
+            })
+        })
     }
     componentDidMount() {
 
@@ -77,6 +81,7 @@ class Main extends React.Component{
     render(){
         let startTime=this.state.startTime.slice(0,10);
         let endTime=this.state.endTime.slice(0,10);
+        if(this.state.authorized){
             return <div className="list-box">
                 <Top/>
                 <div className="m-tags">
@@ -93,6 +98,9 @@ class Main extends React.Component{
 
                 <Bottom storeInfo={this.state.storeInfo}/>
             </div>
+        }
+        return null
+
 
     }
 }

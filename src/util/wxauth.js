@@ -7,7 +7,7 @@ import {config} from '../config'
 const layer = window.layer
 const wx = window.wx
 
-function getWxConfig(url,shareTitle){
+function getWxConfig(url,shareTitle, cb){
     $ajax('/free/getWeChatInfo',{url:url},function(res){
         if(res.status === '1'){
             var data = res.result
@@ -18,6 +18,7 @@ function getWxConfig(url,shareTitle){
 
                     }else{
                         sessionStorage.setItem('accessinfo', JSON.stringify(res))
+                        cb && cb()
                     }
                 }, function(res){
                     // throw new Error('error main')
