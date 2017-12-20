@@ -31,6 +31,8 @@ class Main extends React.Component{
     // }
     componentDidMount() {
 
+        // window.location.reload()
+
 
 
         if(getQueryString('payok')==1){

@@ -33,8 +33,7 @@ class Center extends Component{
     render(){
         if(this.state.canGo){
             return <div>
-                {/*<Main/>*/}
-                123
+                <Main/>
             </div>
         }else{
             return <NoActivity/>
