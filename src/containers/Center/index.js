@@ -18,15 +18,19 @@ class Center extends Component{
     }
 
     componentWillMount(){
-        this.setState({
-            canGo: true
-        })
+        // this.setState({
+        //     canGo: true
+        // })
 
         let enurl ="http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId="+getQueryString('storeId')+"&activityId="+getQueryString('activityId');
         // let url = encodeURIComponent(serveurl);
         let title = '37美长沙芙蓉德政园润心苑店'
         // getWxConfig(enurl, title,this.auth.bind(this))
-        getWxConfig(enurl, title)
+        getWxConfig(enurl, title, ()=>{
+            this.setState({
+                canGo: true
+            })
+        })
 
     }
 
