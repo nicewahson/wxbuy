@@ -49,6 +49,8 @@ class FixFoot extends React.Component {
                                 package: res.result.packages, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
                                 signType: res.result.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                                 paySign: res.result.paySign, // 支付签名
+                                appId: res.result.appId,
+                                partnerid: res.result.partnerid
                                 success: function (res) {
                                     // 支付成功后的回调函数
                                 }

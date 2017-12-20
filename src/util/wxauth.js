@@ -7,7 +7,6 @@ import {config} from '../config'
 const layer = window.layer
 const wx = window.wx
 
-
 function getWxConfig(url,shareTitle){
     $ajax('/free/getWeChatInfo',{url:url},function(res){
         if(res.status === '1'){
