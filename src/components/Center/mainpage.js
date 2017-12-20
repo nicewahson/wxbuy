@@ -25,15 +25,18 @@ class Main extends React.Component{
         }
     }
     componentWillMount(){
-        let url = window.location.href;
-        let title = '37美长沙芙蓉德政园润心苑店'
-        getWxConfig(url, title, ()=>{
-            this.setState({
-                authorized: true
-            },()=>{
-                this.maindata();
+        this.maindata((title)=>{
+            let url = window.location.href;
+            // let title = '37美长沙芙蓉德政园润心苑店'
+            getWxConfig(url, title, ()=>{
+                this.setState({
+                    authorized: true
+                },()=>{
+                    this.maindata();
+                })
             })
-        })
+        });
+
     }
     componentDidMount() {
             if (getQueryString('payok') == 1) {
@@ -48,11 +51,11 @@ class Main extends React.Component{
                 });
             }
 
-        this.maindata();
+
 
     }
 
-    maindata(){
+    maindata(cb){
         let _this= this;
         let url = '/webActivity/getActivityInfo';
         if(sessionStorage.getItem("accessinfo")) {
@@ -72,6 +75,7 @@ class Main extends React.Component{
                         endTime: res.result.info.endTime,
                         storeInfo: res.result.storeInfo
                     });
+                    cb && cb(res.result.storeInfo.title)
                 } else {
                     layer.open({
                         content: res.errorMsg
