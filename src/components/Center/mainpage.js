@@ -31,6 +31,8 @@ class Main extends React.Component{
         getWxConfig(url, title, ()=>{
             this.setState({
                 authorized: true
+            },()=>{
+                this.maindata()
             })
         })
     }
