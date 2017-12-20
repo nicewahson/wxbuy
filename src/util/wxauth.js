@@ -10,7 +10,7 @@ const wx = window.wx
 
 
 function getWxConfig(url,shareTitle, cb){
-    $ajax('/free/getWeChatInfo',{url:'http://activities.sanqimei.com/wxpurchase/wxcenter/build/list'},function(res){
+    $ajax('/free/getWeChatInfo',{url:window.location},function(res){
         if(res.status === '1'){
             var data = res.result;
 
