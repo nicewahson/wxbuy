@@ -23,7 +23,8 @@ class Main extends React.Component{
         }
     }
     componentWillMount(){
-        let url = encodeURIComponent(window.location.href);
+        let serveurl ="http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId="+getQueryString('storeId')+"&activityId="+getQueryString('activityId');
+        let url = encodeURIComponent(serveurl);
         let title = '37美长沙芙蓉德政园润心苑店'
         getWxConfig(url, title)
     }
