@@ -35,7 +35,6 @@ class Main extends React.Component{
     }
     componentDidMount() {
 
-        if(sessionStorage.getItem("accessinfo")) {
 
 
             if (getQueryString('payok') == 1) {
@@ -50,6 +49,8 @@ class Main extends React.Component{
                 });
             }
             let url = '/webActivity/getActivityInfo';
+        if(sessionStorage.getItem("accessinfo")) {
+
             (async () => {
                 let res = await getData(url, 'POST', {
                     storeId: getQueryString('storeId'),
@@ -74,8 +75,8 @@ class Main extends React.Component{
 
                 }
             })();
-
         }
+
 
     }
     render(){
