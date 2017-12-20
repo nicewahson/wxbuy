@@ -3,12 +3,12 @@
  */
 import React from 'react'
 
-// import Top from './top';
-// import Middle from './middle';
+import Top from './top';
+import Middle from './middle';
 //
 //
 import {getWxConfig} from '../../util/wxauth'
-// import Bottom from './bottom'
+import Bottom from './bottom'
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
 
 
@@ -91,7 +91,7 @@ class Main extends React.Component{
                 </div>
                 <Middle/>
 
-                {/*<Bottom storeInfo={this.state.storeInfo}/>*/}
+                <Bottom storeInfo={this.state.storeInfo}/>
             </div>
 
     }
