@@ -35,7 +35,13 @@ class HomeHeader extends React.Component {
                     <span className="m-identifier">￥</span>
                     <span className="m-secskillprice"><em>{secSkillPriceInt}</em><em>{secSkillPriceDecimal}</em></span>
                     <span className="m-price">{priceDecorate}</span>
-                    <span className="m-remainNumber">{numDecorate}</span>
+                    {
+                        this.props.showinfo.number==0?
+                            ""
+                            :
+
+                            <span className="m-remainNumber">{numDecorate}</span>
+                    }
                 </div>
             </div>
         )
