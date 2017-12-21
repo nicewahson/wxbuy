@@ -27,7 +27,11 @@ class SwipeView extends React.Component {
       className:'m-carousel',
       touchThreshold:10,
         autoplay:true,
-        autoplaySpeed:3000
+        autoplaySpeed:3000,
+        afterChange:(currentSlide) =>{
+            this.setState({activeIndex: currentSlide+1})
+        }
+
     };
     return (
       <div className="m-swipe detail">
