@@ -19,7 +19,7 @@ function getWxConfig(url,shareTitle, cb){
 
                         }else{
                             sessionStorage.setItem('accessinfo', JSON.stringify(res))
-
+                            cb && cb()
                         }
                     }, function(res){
                         // throw new Error('error main')
@@ -30,7 +30,10 @@ function getWxConfig(url,shareTitle, cb){
                         });
                     })
                 }
-                cb && cb()
+                else{
+                    cb && cb()
+                }
+
             }else{
                 let url='http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId='+getQueryString('storeId')+'&activityId='+getQueryString('activityId')
                 let encodrUrl = encodeURIComponent(url);

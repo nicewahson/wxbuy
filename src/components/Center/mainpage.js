@@ -58,8 +58,9 @@ class Main extends React.Component{
     maindata(){
         let _this= this;
         let url = '/webActivity/getActivityInfo';
+        console.log(123);
         if(sessionStorage.getItem("accessinfo")) {
-
+            console.log(456);
             (async () => {
                 let res = await getData(url, 'POST', {
                     storeId: getQueryString('storeId'),
