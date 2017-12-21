@@ -87,14 +87,7 @@ class Main extends React.Component{
                     });
                     let title= res.result.storeInfo.title
                     wxShareReady(title, title + config.shareContent, config.shareLogo);
-                } else {
-                    layer.open({
-                        content: res.errorMsg
-                        , skin: 'msg'
-                        , time: 2
-                    });
-
-                }
+                } 
             })();
         }
     }
