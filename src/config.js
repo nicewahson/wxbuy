@@ -1,5 +1,5 @@
 import {getData, getQueryString, $ajax} from './fetch/getData'
-const host = {url:'http://store-server.test.sanqimei.com'}//开发
+const host = {url:'http://store-server.show.sanqimei.com'}//开发
 // host:'http://app-server.sanqimei.com',
 // host:'http://app-server.sanqimei.com',
 // host:'http://app-server.dev.sanqimei.com',

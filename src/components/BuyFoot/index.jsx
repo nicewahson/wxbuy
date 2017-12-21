@@ -38,7 +38,7 @@ class FixFoot extends React.Component {
                     this.setState({
                         orderCode:res.result.orderCode
                     });
-                    let url = 'http://app-server.test.sanqimei.com/pay/generateOrder';
+                    let url = 'http://app-server.show.sanqimei.com/pay/generateOrder';
                     (async () => {
                         let res = await getData(url, 'POST', {out_trade_no:this.state.orderCode,openid:JSON.parse(sessionStorage.getItem("accessinfo")).openid,token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,channel:3,ip:"123.12.12.123"});
                         if (res.status == 1) {
