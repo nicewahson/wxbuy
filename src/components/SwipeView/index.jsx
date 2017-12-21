@@ -17,6 +17,7 @@ class SwipeView extends React.Component {
   }
   render() {
     let swipeImgs = this.props.swipeImgs;
+    console.log(swipeImgs);
     let settings = {
       dots: false,
         infinite: true,
@@ -30,7 +31,7 @@ class SwipeView extends React.Component {
     };
     return (
       <div className="m-swipe detail">
-        {swipeImgs.length?
+        {swipeImgs.length>1?
             <div className="m-swipe-container">
                 <Slider {...settings}>
                   {
@@ -43,7 +44,17 @@ class SwipeView extends React.Component {
                 </Slider> 
                 {/*<div className="m-computed">{this.state.activeIndex}/{swipeImgs.length}</div>*/}
             </div>
-         :<div></div>
+         :<div className="m-swipe-container only">
+
+                  {
+                      swipeImgs.map((item,index) => {
+                          return <div key={index}>
+                            <img src={item.pic} alt=''/>
+                          </div>
+                      })
+                  }
+
+            </div>
         }
          
       </div>

@@ -11,7 +11,7 @@ import {config} from '../../config'
 import {getWxConfig,wxShareReady} from '../../util/wxauth'
 import Bottom from './bottom'
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
-
+import logo from '../../static/img/active.png'
 
 const layer =window.layer
 
@@ -21,8 +21,10 @@ class Main extends React.Component{
         this.state = {
             startTime:"",
             endTime:"",
+            newuser:"",
             storeInfo:{},
-            authorized:false
+            authorized:false,
+            accode:""
         }
     }
     componentWillMount(){
@@ -65,12 +67,14 @@ class Main extends React.Component{
                     openId: JSON.parse(sessionStorage.getItem("accessinfo")).openid,
                     wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
                 });
-                console.log(123);
+                console.log(res);
 
                 if (res.status == '1') {
                     _this.setState({
                         startTime: res.result.info.startTime,
                         endTime: res.result.info.endTime,
+                        newuser: res.result.info.userType,
+                        accode:res.errorCode,
                         storeInfo: res.result.storeInfo
                     });
                     let title= res.result.storeInfo.title
@@ -91,21 +95,36 @@ class Main extends React.Component{
         let startTime=this.state.startTime.slice(0,10);
         let endTime=this.state.endTime.slice(0,10);
         if(this.state.authorized){
-            return <div className="list-box">
-                <Top/>
-                <div className="m-tags">
-                    <ul>
-                        <li>
-                            <span>活动有效期：{startTime}  至 {endTime}   </span>
-                        </li>
-                        <li className="ml">
-                            <span >仅限新用户</span>
-                        </li>
-                    </ul>
-                </div>
-                <Middle/>
+            return  <div>
+                {this.state.accode == 4444?
+                    <div className="active-over">
+                        <img  className="logo" src = {logo}/>
+                        <span className="undershelf">该活动已下架，请到别处看看吧~</span>
+                    </div>
 
-                <Bottom storeInfo={this.state.storeInfo}/>
+                        :
+                    <div className="list-box">
+                        <Top/>
+                        <div className="m-tags">
+                            <ul>
+                                <li>
+                                    <span>活动有效期：{startTime} 至 {endTime}   </span>
+                                </li>
+                                <li className="ml">
+                                    {
+                                        this.state.newuser == 2 ?
+                                            <span >仅限新用户</span>
+                                            : <span></span>
+                                    }
+
+                                </li>
+                            </ul>
+                        </div>
+                        <Middle/>
+
+                        <Bottom storeInfo={this.state.storeInfo}/>
+                    </div>
+                }
             </div>
         }
         return null

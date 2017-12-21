@@ -13,7 +13,7 @@
     margin: 0px;
     button{
       &:before{
-        transform:scale(0.5);
+        transform:scale(0.7);
       }
     }
   }
@@ -74,5 +74,22 @@
   }
   img{
     width: 100%;
+  }
+}
+.active-over{
+  .logo{
+    position: absolute;
+    top:30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transform-origin: 0 0;
+    max-width: 100%;
+    width: 40%;
+  }
+  .undershelf{
+    text-align: center;
+    margin-top: 80%;
+    display: block;
+    color: #999;
   }
 }

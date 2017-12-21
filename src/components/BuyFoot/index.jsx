@@ -18,7 +18,7 @@ class FixFoot extends React.Component {
         this.setState({editable: false});
         if(this.props.buttonTyle.type ==1){
             layer.open({
-                content: this.props.buttonTyle.info
+                content: "该活动还未开始"
                 ,skin: 'msg'
                 ,time: 2
             });
@@ -38,7 +38,7 @@ class FixFoot extends React.Component {
                     this.setState({
                         orderCode:res.result.orderCode
                     });
-                    let url = 'http://app-server.dev.sanqimei.com/pay/generateOrder';
+                    let url = 'http://app-server.test.sanqimei.com/pay/generateOrder';
                     (async () => {
                         let res = await getData(url, 'POST', {out_trade_no:this.state.orderCode,openid:JSON.parse(sessionStorage.getItem("accessinfo")).openid,token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,channel:3,ip:"123.12.12.123"});
                         if (res.status == 1) {
@@ -52,18 +52,26 @@ class FixFoot extends React.Component {
                                 appId: res.result.appId,
                                 partnerid: res.result.partnerid,
                                 success: function (res) {
-                                    layer.open({
-                                        content: '您已成功购买该商品，下载APP，立即预约体验吧~'
-                                        , btn: ['去下载', '取消']
-                                        , yes: function (index) {
-                                            window.location.href = 'https://app.sanqimei.com/upgrade/index'
-                                        }, no: function (index) {
-                                            browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
-                                        }
-                                    });
+                                    // layer.open({
+                                    //     content: '您已成功购买该商品，下载APP，立即预约体验吧~'
+                                    //     , btn: ['去下载', '取消']
+                                    //     , yes: function (index) {
+                                    //         window.location.href = 'https://app.sanqimei.com/upgrade/index'
+                                    //     }, no: function (index) {
+                                    //         browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
+                                    //     }
+                                    // });
+                                    browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&payok=1'+'&state=1')
 
 
                                 }
+                            });
+                        }
+                        else{
+                            layer.open({
+                                content: res.errorMsg
+                                ,skin: 'msg'
+                                ,time: 2
                             });
                         }
                     })()
@@ -74,7 +82,7 @@ class FixFoot extends React.Component {
         }
         else if(this.props.buttonTyle.type ==3){
             layer.open({
-                content: this.props.buttonTyle.info
+                content: "该商品已被抢完"
                 ,skin: 'msg'
                 ,time: 2
             });
@@ -94,7 +102,7 @@ class FixFoot extends React.Component {
 
     render() {
         let buyButton="";
-        console.log(this.props.buttonTyle.type);
+        console.log(this.props.buttonTyle.info);
         // if(this.props.buttonTyle.type ===1){
         //     buyButton =`活动有效期：${this.props.buttonTyle.info}`;
         // }else if(this.props.buttonTyle.type ===2){

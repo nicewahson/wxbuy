@@ -13,26 +13,29 @@ function getWxConfig(url,shareTitle, cb){
             var data = res.result
             if(getQueryString('state') == '1'){
                 let code = getQueryString('code')
-                $ajax('/oauth/getAccessToken', {code}, function(res){
-                    if(res.errcode){
+                if(!sessionStorage.getItem("accessinfo")){
+                    $ajax('/oauth/getAccessToken', {code}, function(res){
+                        if(res.errcode){
 
-                    }else{
-                        sessionStorage.setItem('accessinfo', JSON.stringify(res))
-                        cb && cb()
-                    }
-                }, function(res){
-                    // throw new Error('error main')
-                    layer.open({
-                        content: '获取微信信息异常'
-                        ,skin: 'msg'
-                        ,time: 2
-                    });
-                })
+                        }else{
+                            sessionStorage.setItem('accessinfo', JSON.stringify(res))
+
+                        }
+                    }, function(res){
+                        // throw new Error('error main')
+                        layer.open({
+                            content: '获取微信信息异常'
+                            ,skin: 'msg'
+                            ,time: 2
+                        });
+                    })
+                }
+                cb && cb()
             }else{
                 let url='http://activities.sanqimei.com/wxpurchase/wxcenter/build/list?storeId='+getQueryString('storeId')+'&activityId='+getQueryString('activityId')
                 let encodrUrl = encodeURIComponent(url);
                 window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${data.appId}&redirect_uri=${encodrUrl}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect`
-                // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.203%3a3000%2fwxcenter&scope=snsapi_userinfo&connect_redirect=1&state=1`
+                // window.location.href = `https://activities.sanqimei.com/get-weixin-code.html?appid=${data.appId}&redirect_uri=http%3a%2f%2f192.168.88.204%3a3000%2fwxpurchase%2fwxcenter%2fbuild%2flist%3fstoreId%3d54%26activityId%3d44&scope=snsapi_userinfo&connect_redirect=1&state=1`
             }
 
             //初始化微信配置

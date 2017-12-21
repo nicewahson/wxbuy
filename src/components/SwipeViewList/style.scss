@@ -2,7 +2,6 @@
 .list-swipe{
   position: relative;
   width:100%;
-  padding-top: 10px;
   background-color: #fff;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
    .sw-listpic{
@@ -10,11 +9,13 @@
      color: #4e4e4e;
      overflow: hidden;
       position: relative;
+     border-bottom: 1px solid #eee;
+     padding: 15px 0;
      .ml-img{
         width: 30%;
        float: left;
-       margin-right: 2%;
-       padding: 2% 0 2% 2%;
+       margin-right: 15px;
+       padding: 0 0 0 2%;
        img{
           width: 100%;
          display: block;
@@ -23,15 +24,19 @@
      .ml-title{
         font-size: 14px;
        float: left;
-       width: 66%;
-       height: 38px;
-       line-height: 19px;
+       width: 62%;
+       height: 36px;
+       line-height: 18px;
        overflow: hidden;
-       margin-top: 2%;
+
+       b{
+         font-weight: normal;
+       }
      }
      .ml-price{
        float: left;
-       width: 66%;
+       width: 62%;
+       margin-top: 12px;
        .price{
          width: 40%;
          float: left;
@@ -39,9 +44,9 @@
            display: block;
            &.cx{
              color:#E84141 ;
-             font-size: 18px;
+             font-size: 14px;
              b{
-               font-size: 28px;
+               font-size: 22px;
              }
            }
            &.yj{
@@ -62,17 +67,18 @@
            text-align: center;
            color: #fff;
            text-decoration: none;
-           width: 80px;
+           width: 72px;
            float: right;
            pointer-events: auto;
          }
          .lastnum{
            .sy{
-             font-size: 12px;
+             font-size: 10px;
              display: block;
              text-align: center;
              margin-top: 5px;
              float: left;
+             color: #999;
            }
          }
 
@@ -81,13 +87,16 @@
        .overbuy{
          width: 40%;
          float: right;
-         span{
+         .over{
            font-size: 14px;
            display: block;
-           text-align: center;
+           text-align: right;
            color:#999 ;
            margin-top: 36px;
            font-weight: bold;
+           background:none;
+           float: right;
+           pointer-events: auto;
          }
        }
      }
@@ -117,8 +126,8 @@
 
 }
 
-.progressBar{width:50%;height:8px;background-color:#eee;border-radius:5px;margin-top:10px; float: right}
-.bar{height:8px;border-radius:5px;background:#E84141;}
+.progressBar{width:50%;height:5px;background-color:#eee;border-radius:5px;margin-top:10px; float: right}
+.bar{height:5px;border-radius:5px;background:#FF8051;}
 .sy-bar{
   font-size: 0;
 }

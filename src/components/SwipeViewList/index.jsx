@@ -66,12 +66,13 @@ class SwipeViewList extends React.Component {
                 }
                 {
                   item.state==2 && <div className="overbuy">
-                    <span>已抢完</span>
+                    <button className="msc over" onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>已抢完</button>
                   </div>
                 }
                 {
                   item.state==3 && <div className="overbuy">
-                    <span>已购买</span>
+                    <button className="msc over" onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>已购买</button>
+
                   </div>
                 }
             </div>
@@ -89,13 +90,13 @@ class SwipeViewList extends React.Component {
       ));
 
 
-      let twoswipe="";
+      let twoswipe=[];
       for(let i=0; i<swipeImgsLi.length; i=i+2){
         console.log(i,swipeImgsLi[i]);
-          twoswipe= <div>
+          twoswipe.push(<div key={i}>
              {swipeImgsLi[i]}
              {swipeImgsLi[i+1]}
-         </div>
+         </div>)
        }
 
       return (

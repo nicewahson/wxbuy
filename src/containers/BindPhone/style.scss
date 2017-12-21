@@ -18,23 +18,23 @@ input:-webkit-autofill{
     transform: translate(-50%,-50%);
     transform-origin: 0 0;
     max-width: 100%;
-    border-radius:50%;
+    width: 50%;
   }
   .f-mod{
     overflow: hidden;
     padding-top: 50%;
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
     .f-group{
       display: flex;
       box-sizing: border-box;
-      background:rgba(255,255,255,.3);
+      background:rgba(255,255,255,.1);
       border-radius: 6px;
       margin-top: 16px;
       overflow: hidden;
       line-height: 44px;
       position: relative;
-      border: 1px solid #e1e1e1;
+      border: 1px solid #F1F1F1;
       .label{
         box-sizing: border-box;
         display: inline-block;
@@ -56,14 +56,15 @@ input:-webkit-autofill{
           height: 24px;
           line-height: 24px;
           vertical-align:middle;
-          margin:10px 0;
+          margin:8px 0;
           background: none;
-          font-size: 16px;
-          color: #666;;
+          font-size: 14px;
+          color: #666;
+          padding: 0 10px;
 
           &::-webkit-input-placeholder{
-            color: #999;
-            font-size: 16px;
+            color: #ccc;
+            font-size: 14px;
           }
         }
       }
@@ -82,14 +83,17 @@ input:-webkit-autofill{
         box-sizing: border-box;
         background: none;
         flex: 0 0 80px;
-        width: 80px;
+        width: 90px;
         height: 16px;
         line-height: 16px;
-        margin: 14px 0px;
+        margin: 12px 0px;
         text-align: center;
-        color: #666;
-        font-size: 16px;
-        border-left: 1px solid #e1e1e1;
+        color: #ccc;
+        font-size: 14px;
+        border-left: 1px solid #f1f1f1;
+      }
+      .bcolor{
+        color: #1C96A0;
       }
       .get{
         color: #666;
@@ -106,7 +110,7 @@ input:-webkit-autofill{
         color:#fff;
         font-size: 16px;
         font-weight: normal;
-        background: #5cb85c;
+        background: #1C96A0;
         border: none;
         display: block;
         text-align: center;

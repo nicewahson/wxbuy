@@ -2,7 +2,7 @@ import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {browserHistory} from 'react-router';
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
-import logo from '../../static/img/logo.png'
+import logo from '../../static/img/blogo.png'
 import {sentcode,nowBind} from '../../fetch/commonApi'
 import $ from 'jquery'
 import './style.scss'
@@ -28,7 +28,7 @@ class Home extends React.Component {
         var Timer = setInterval(function(){
             if(num<=0){
                 clearInterval(Timer);
-                $('#getcode').removeAttr('disabled').text('验证码').removeClass('get')
+                $('#getcode').removeAttr('disabled').text('发送验证码').removeClass('get')
                 return
             }
             num--;
@@ -123,7 +123,7 @@ class Home extends React.Component {
                 this.setState({
                     orderCode:res.result.orderCode
                 });
-                let url = 'http://app-server.dev.sanqimei.com/pay/generateOrder';
+                let url = 'http://app-server.test.sanqimei.com/pay/generateOrder';
                 (async () => {
                     let res = await getData(url, 'POST', {out_trade_no:this.state.orderCode,openid:JSON.parse(sessionStorage.getItem("accessinfo")).openid,token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,channel:3,ip:"123.12.12.123"});
                     if (res.status == 1) {
@@ -137,15 +137,17 @@ class Home extends React.Component {
                             appId: res.result.appId,
                             partnerid: res.result.partnerid,
                             success: function (res) {
-                                layer.open({
-                                    content: '您已成功购买该商品，下载APP，立即预约体验吧~'
-                                    , btn: ['去下载', '取消']
-                                    , yes: function (index) {
-                                        window.location.href = 'https://app.sanqimei.com/upgrade/index'
-                                    }, no: function (index) {
-                                        browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
-                                    }
-                                });
+                                // layer.open({
+                                //     content: '您已成功购买该商品，下载APP，立即预约体验吧~'
+                                //     , btn: ['去下载', '取消']
+                                //     , yes: function (index) {
+                                //         window.location.href = 'https://app.sanqimei.com/upgrade/index'
+                                //     }, no: function (index) {
+                                //         browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
+                                //     }
+                                // });
+                                browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&payok=1'+'&state=1')
+
                             }
                         });
                     }
@@ -153,12 +155,6 @@ class Home extends React.Component {
 
             } else if(res.status == '0'){
 
-                layer.open({
-                    content: res.errorMsg
-                    ,skin: 'msg'
-                    ,time: 2
-                });
-            }else{
                 layer.open({
                     content: res.errorMsg
                     ,skin: 'msg'
@@ -180,17 +176,17 @@ class Home extends React.Component {
                                     <div className="f-mod">
                                         <div className="f-group">
                                             <div className="for-in">
-                                                <input name="phone" type="number"  placeholder="填输入手机号"/>
+                                                <input name="phone" type="number"  placeholder="填输入手机号" onFocus={()=>{$("#getcode").addClass("bcolor")}} onBlur={()=>{$("#getcode").removeClass("bcolor")}}/>
                                             </div>
                                         </div>
                                         <div className="f-group f-code">
                                             <div className="for-in">
-                                                <input name="code" type="number"  placeholder="请输入验证码"/>
+                                                <input name="code" type="number"  placeholder="请输入验证码" />
 
                                             </div>
                                             <button type="button" id="getcode" className="sent" onClick={() => {
                                                 this.sentCode()
-                                            }}>验证码</button>
+                                            }}>发送验证码</button>
                                         </div>
                                         <div className="f-sub">
                                             <a  onClick={() => {
