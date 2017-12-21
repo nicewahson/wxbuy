@@ -45,7 +45,7 @@ class SwipeViewList extends React.Component {
 
     };
       let swipeImgsLi =swipeImgs && swipeImgs.map((item, index) => (
-          <div className="sw-listpic" key={index}>
+          <div className="sw-listpic" key={index} onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>
             <div className="ml-img"><img src={item.spuPic}/> </div>
             <div className="ml-title"><b>{item.spuName}</b></div>
             <div className="ml-price">
@@ -56,7 +56,7 @@ class SwipeViewList extends React.Component {
                 {
                     item.state==1 &&
                     <div className="nowbuy">
-                    <button className="msc" onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>马上抢</button>
+                    <button className="msc">马上抢</button>
                     <div className="clearfix"></div>
                     <div className="lastnum">
                       <span className="sy">仅剩余{item.number}份</span>
@@ -66,25 +66,25 @@ class SwipeViewList extends React.Component {
                 }
                 {
                   item.state==2 && <div className="overbuy">
-                    <button className="msc over" onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>已抢完</button>
+                    <button className="msc over" >已抢完</button>
                   </div>
                 }
                 {
                   item.state==3 && <div className="overbuy">
-                    <button className="msc over" onClick={()=>{ browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + item.spuId+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))}}>已购买</button>
+                    <button className="msc over" >已购买</button>
 
                   </div>
                 }
             </div>
 
-              {
-                  timestamp1-timestamp2<0?
-                <div className="active-over">
-                  <span>活动已结束</span>
-                </div>
-                      :
-                      ""
-              }
+              {/*{*/}
+                  {/*swipeImgs[0].state==4?*/}
+                {/*<div className="active-over">*/}
+                  {/*<span>活动已结束</span>*/}
+                {/*</div>*/}
+                      {/*:*/}
+                      {/*""*/}
+              {/*}*/}
 
           </div>
       ));

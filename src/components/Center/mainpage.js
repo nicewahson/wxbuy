@@ -8,6 +8,7 @@ import Middle from './middle';
 import {config} from '../../config'
 //
 //
+import {browserHistory} from 'react-router';
 import {getWxConfig,wxShareReady} from '../../util/wxauth'
 import Bottom from './bottom'
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
@@ -38,15 +39,20 @@ class Main extends React.Component{
             })
         })
     }
+
     componentDidMount() {
             if (getQueryString('payok') == 1) {
+
                 layer.open({
                     content: '您已成功购买该商品，下载APP，立即预约体验吧~'
                     , btn: ['去下载', '取消']
                     , yes: function (index) {
                         window.location.href = 'https://app.sanqimei.com/upgrade/index'
                     }, no: function (index) {
+                        browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' +getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
+
                         layer.close(index);
+
                     }
                 });
             }
@@ -69,13 +75,14 @@ class Main extends React.Component{
                     wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
                 });
                 console.log(res);
-
+                _this.setState({
+                    accode:res.errorCode
+                });
                 if (res.status == '1') {
                     _this.setState({
                         startTime: res.result.info.startTime,
                         endTime: res.result.info.endTime,
                         newuser: res.result.info.userType,
-                        accode:res.errorCode,
                         storeInfo: res.result.storeInfo
                     });
                     let title= res.result.storeInfo.title
@@ -95,6 +102,7 @@ class Main extends React.Component{
     render(){
         let startTime=this.state.startTime.slice(0,10);
         let endTime=this.state.endTime.slice(0,10);
+        console.log(this.state.accode);
         if(this.state.authorized){
             return  <div>
                 {this.state.accode == 4444?

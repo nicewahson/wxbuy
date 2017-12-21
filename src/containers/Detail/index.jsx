@@ -78,6 +78,15 @@ class Detail extends React.Component {
         }
     }
     componentDidMount() {
+
+
+        // window.addEventListener("popstate", function(e) {
+        //     let currentUrl = window.location.href;
+        //     let targetUrl = currentUrl.replace(/\/storeId/, "");
+        //     window.location.href = targetUrl;
+        //     alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能
+        // }, false);
+
         console.log(this.props.location.query.token);
          const result = getDetailInfo(this.state.spuId,getQueryString('activityId'),getQueryString('storeId'),JSON.parse(sessionStorage.getItem("accessinfo")).openid,JSON.parse(sessionStorage.getItem("accessinfo")).access_token)
          result.then(res => {

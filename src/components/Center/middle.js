@@ -14,6 +14,7 @@ class Middle extends React.Component{
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
+            accode:""
         }
     }
     componentDidMount() {
@@ -29,12 +30,11 @@ class Middle extends React.Component{
                     wxToken: JSON.parse(sessionStorage.getItem("accessinfo")).access_token
                 });
 
-
                 if (res.status == '1') {
 
                     this.setState({
                         buyList: res.result.lstSpu,
-                        activestatus: res.result.info.endTime
+                        activestatus: res.result.info.endTime,
                     });
                 } else {
                     layer.open({
@@ -50,7 +50,7 @@ class Middle extends React.Component{
     }
     render(){
         return <div>
-            <SwipeViewList swipeImgs={this.state.buyList} activestatus={this.state.activestatus}/>
+            <SwipeViewList swipeImgs={this.state.buyList} activestatus={this.state.activestatus} />
         </div>
     }
 }

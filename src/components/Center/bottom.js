@@ -28,7 +28,7 @@ class Bottom extends React.Component{
             longitude: JSON.parse(this.props.storeInfo.lon), // 经度，浮点数，范围为180 ~ -180。
             name: this.props.storeInfo.name, // 位置名
             address: this.props.storeInfo.address, // 地址详情说明
-            scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+            scale: 28, // 地图缩放级别,整形值,范围从1~28。默认为最大
             infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
         });
         // wx.openLocation({
@@ -58,7 +58,7 @@ class Bottom extends React.Component{
                 </div>
             </div>
             <div className="buy-info">
-                <p className="sc-shop">适用商户</p>
+                <p className="sc-shop bbtton">购买说明</p>
                 <img className="ri" src={buyinfo} alt=""/>
             </div>
         </div>

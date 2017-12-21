@@ -12,7 +12,8 @@
      border-bottom: 1px solid #eee;
      padding: 15px 0;
      .ml-img{
-        width: 30%;
+       max-width: 100px;
+       max-height: 100px;
        float: left;
        margin-right: 15px;
        padding: 0 0 0 2%;
@@ -24,7 +25,7 @@
      .ml-title{
         font-size: 14px;
        float: left;
-       width: 62%;
+       width: 64%;
        height: 36px;
        line-height: 18px;
        overflow: hidden;
@@ -35,7 +36,7 @@
      }
      .ml-price{
        float: left;
-       width: 62%;
+       width: 64%;
        margin-top: 12px;
        .price{
          width: 40%;
@@ -108,6 +109,7 @@
        display: flex;
        justify-content:center;
        align-items:center;
+       margin-top: -15px;
        span{
          width: 100px;
          height: 100px;
@@ -126,7 +128,7 @@
 
 }
 
-.progressBar{width:50%;height:5px;background-color:#eee;border-radius:5px;margin-top:10px; float: right}
+.progressBar{width:72px;height:5px;background-color:#eee;border-radius:5px;margin-top:10px; float: right}
 .bar{height:5px;border-radius:5px;background:#FF8051;}
 .sy-bar{
   font-size: 0;
