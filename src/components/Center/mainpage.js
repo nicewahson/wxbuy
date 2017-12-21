@@ -49,7 +49,7 @@ class Main extends React.Component{
                     , yes: function (index) {
                         window.location.href = 'https://app.sanqimei.com/upgrade/index'
                     }, no: function (index) {
-                        browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' +getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
+                        window.location.replace('/wxpurchase/wxcenter/build/list?activityId=' +getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
 
                         layer.close(index);
 
