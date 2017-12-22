@@ -176,7 +176,7 @@ class Home extends React.Component {
                                     <div className="f-mod">
                                         <div className="f-group">
                                             <div className="for-in">
-                                                <input name="phone" type="number"  placeholder="填输入手机号" onFocus={()=>{$("#getcode").addClass("bcolor")}} onBlur={()=>{$("#getcode").removeClass("bcolor")}}/>
+                                                <input name="phone" type="number"  placeholder="填输入手机号" />
                                             </div>
                                         </div>
                                         <div className="f-group f-code">

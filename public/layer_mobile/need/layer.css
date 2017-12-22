@@ -113,7 +113,7 @@
 }
 
 .layui-m-layer0 .layui-m-layerchild {
-    width: 90%;
+    width: 70%;
     max-width: 640px
 }
 
@@ -149,7 +149,7 @@
 }
 
 .layui-m-layercont {
-    padding: 50px 30px;
+    padding: 40px 30px;
     line-height: 22px;
     text-align: center
 }
@@ -236,8 +236,8 @@
     height: 50px;
     line-height: 50px;
     font-size: 0;
-    border-top: 1px solid #D0D0D0;
-    background-color: #F2F2F2
+    border-top: 1px solid #ddd;
+    background-color: #fff
 }
 
 .layui-m-layerbtn span {
@@ -250,12 +250,13 @@
 }
 
 .layui-m-layerbtn span[yes] {
-    color: #40AFFE
+    color: #1C96A0
 }
 
 .layui-m-layerbtn span[no] {
-    border-right: 1px solid #D0D0D0;
-    border-radius: 0 0 0 5px
+    border-right: 1px solid #ddd;
+    border-radius: 0 0 0 5px;
+    color:#ccc
 }
 
 .layui-m-layerbtn span:active {
