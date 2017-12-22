@@ -14,6 +14,51 @@ class FixFoot extends React.Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
+    componentDidMount() {
+        if (getQueryString('ordernum')) {
+
+            let url = 'http://app-server.sanqimei.com/pay/generateOrder';
+            (async () => {
+                let res = await getData(url, 'POST', {out_trade_no:getQueryString('ordernum'),openid:JSON.parse(sessionStorage.getItem("accessinfo")).openid,token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,channel:3,ip:"123.12.12.123"});
+                if (res.status == 1) {
+                    console.log(res.result);
+                    wx.chooseWXPay({
+                        timestamp:res.result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                        nonceStr: res.result.nonceStr, // 支付签名随机串，不长于 32 位
+                        package: res.result.packages, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                        signType: res.result.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                        paySign: res.result.paySign, // 支付签名
+                        appId: res.result.appId,
+                        partnerid: res.result.partnerid,
+                        success: function (res) {
+                            // layer.open({
+                            //     content: '您已成功购买该商品，下载APP，立即预约体验吧~'
+                            //     , btn: ['去下载', '取消']
+                            //     , yes: function (index) {
+                            //         window.location.href = 'https://app.sanqimei.com/upgrade/index'
+                            //     }, no: function (index) {
+                            //         browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
+                            //     }
+                            // });
+                            browserHistory.push('/wxpurchase/wxcenter/build/list?activityId=' + getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&payok=1'+'&state=1')
+
+
+                        }
+                    });
+                }
+                else{
+                    layer.open({
+                        content: res.errorMsg
+                        ,skin: 'msg'
+                        ,time: 2
+                    });
+                }
+            })()
+        }
+
+        this.maindata();
+
+    }
     check() {
         this.setState({editable: false});
         if(this.props.buttonTyle.type ==1){

@@ -153,7 +153,7 @@ class Home extends React.Component {
                 //     }
                 // })()
 
-                browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + getQueryString('spuId')+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId'))
+                browserHistory.push('/wxpurchase/wxcenter/build/detail?spuId=' + getQueryString('spuId')+'&activityId='+getQueryString('activityId')+'&storeId='+getQueryString('storeId')+'&ordernum='+this.state.orderCode)
 
             } else if(res.status == '0'){
 
