@@ -9,14 +9,12 @@
      color: #4e4e4e;
      overflow: hidden;
       position: relative;
-     border-bottom: 1px solid #eee;
-     padding: 15px 0;
+     border-bottom: 1px solid #f8f8f8;
+     padding: 4% 0;
      .ml-img{
-       max-width: 100px;
-       max-height: 100px;
+       width: 29.5%;
        float: left;
-       margin-right: 15px;
-       padding: 0 0 0 2%;
+       margin: 0 0 0 4%;
        img{
           width: 100%;
          display: block;
@@ -25,10 +23,11 @@
      .ml-title{
         font-size: 14px;
        float: left;
-       width: 64%;
+       width: 62.5%;
        height: 36px;
        line-height: 18px;
        overflow: hidden;
+       padding-left: 4%;
 
        b{
          font-weight: normal;
@@ -36,11 +35,13 @@
      }
      .ml-price{
        float: left;
-       width: 64%;
-       margin-top: 12px;
+       width: 62.5%;
+       margin-top: 5.5%;
+       padding-left: 4%;
        .price{
          width: 40%;
          float: left;
+         margin-top: 8px;
          span{
            display: block;
            &.cx{
@@ -52,7 +53,7 @@
            }
            &.yj{
              color: #999;
-             font-size: 14px;
+             font-size: 12px;
            }
          }
        }
