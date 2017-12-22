@@ -19,7 +19,7 @@ class FixFoot extends React.Component {
                     </div>
                 </div>
                 <div className="btns">
-                    <span onClick={()=>{window.location.href =`http://activities.show.sanqimei.com/new-personality/index.html?userId=${this.props.userId}&type=1`}}>新人奖励</span>
+                    <span onClick={()=>{window.location.href =`http://activities.sanqimei.com/new-personality/index.html?userId=${this.props.userId}&type=1`}}>新人奖励</span>
                     <span onClick={()=>{window.location.href ='https://app.sanqimei.com/upgrade/index'}}>立即下载</span>
                 </div>
             </div>

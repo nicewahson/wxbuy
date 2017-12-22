@@ -40,5 +40,5 @@
  
     //???Image????????????
     var img = new Image(1, 1); 
-    img.src = 'http://activity-server.show.sanqimei.com/visit/gif?' + args;
+    img.src = 'http://activity-server.sanqimei.com/visit/gif?' + args;
 })();
