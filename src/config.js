@@ -10,7 +10,7 @@ const config = {
     shareLogo:'http://devstatic.sanqimei.com/images/products/7740055041513774005.jpg',
     shareTitle:'',
     shareContent:'又出新活动啦！快来抢购吧~',
-
+    indexUri: 'http://activities.sanqimei.com/wxpurchase/wxcenter/build/list'
 }
 
 export {host, config, wxHost}
