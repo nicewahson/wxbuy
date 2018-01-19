@@ -2,6 +2,7 @@ import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {browserHistory} from 'react-router';
 import {getData, getQueryString, $ajax} from '../../fetch/getData'
+import {config} from '../../config.js'
 import $ from 'jquery'
 // import layer from 'layer'
 const wx = window.wx
@@ -17,7 +18,7 @@ class FixFoot extends React.Component {
     componentDidMount() {
         if (getQueryString('ordernum')) {
 
-            let url = 'http://app-server.sanqimei.com/pay/generateOrder';
+            let url = config.payUrl + '/pay/generateOrder';
             (async () => {
                 let res = await getData(url, 'POST', {out_trade_no:getQueryString('ordernum'),openid:JSON.parse(sessionStorage.getItem("accessinfo")).openid,token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,channel:3,ip:"123.12.12.123"});
                 if (res.status == 1) {
@@ -83,7 +84,7 @@ class FixFoot extends React.Component {
                     this.setState({
                         orderCode:res.result.orderCode
                     });
-                    let url = 'http://app-server.sanqimei.com/pay/generateOrder';
+                    let url = config.payUrl + '/pay/generateOrder';
                     (async () => {
                         let res = await getData(url, 'POST', {out_trade_no:this.state.orderCode,openid:JSON.parse(sessionStorage.getItem("accessinfo")).openid,token:JSON.parse(sessionStorage.getItem("accessinfo")).access_token,channel:3,ip:"123.12.12.123"});
                         if (res.status == 1) {
