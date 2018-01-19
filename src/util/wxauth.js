@@ -70,6 +70,7 @@ function wxShareConfig(appId, timestamp, nonceStr, signature) {
             'onMenuShareAppMessage',
             'onMenuShareQQ',
             'onMenuShareQZone',
+            'chooseWXPay',
             'openLocation',
             'getLocation'
         ]
